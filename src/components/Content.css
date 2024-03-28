@@ -1,0 +1,6 @@
+.movies {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    /*https://www.cssmatic.com/box-shadow*/
+}

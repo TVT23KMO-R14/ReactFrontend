@@ -1,0 +1,51 @@
+.movie-list-top100 {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1em;
+}
+
+.movie-top100 {
+    border-radius: 0.6em;
+    position: relative;
+    overflow: hidden;
+}
+
+.movie-top100 img {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    transition: transform 0.3s;
+    max-width: 400px;
+}
+
+.movie-top100 h1 {
+    color: white;
+    font-size: 1.5em;
+    margin: 0 0.5em;
+}
+
+.layer {
+    height: 0%;
+    width: 100%;
+    background: linear-gradient(rgba(0,0,0,0.6), #ff004f);
+    border-radius: 0.6em;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    transition: height 0.3s;
+}
+
+.movie-top100:hover img {
+    transform: scale(1.1);
+}
+
+.movie-top100:hover .layer {
+    height: 100%;
+}

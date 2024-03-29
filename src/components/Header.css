@@ -1,3 +1,43 @@
+.header>* {
+    background: #ffffff;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    gap: 0.5rem;
+    /*https://www.cssmatic.com/box-shadow*/
+    -webkit-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.50);
+    -moz-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.50);
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.50);
+    height: 3rem;
+  }
+
+.header .search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.header .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.header .login {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    flex-direction: row;
+    flex: 1;
+}
+
+.header .login img {
+    margin: 0 0.5rem 0 0.5rem;
+    width: 20px;
+    height: 20px;
+}
+
 h2 {
     margin: 0;
     padding: 0;

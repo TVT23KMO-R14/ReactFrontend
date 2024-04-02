@@ -5,7 +5,7 @@ import Sidebar from './components/MainSidebar'
 import Footer from './components/Footer'
 import Content from './components/Content'
 import Carousel from './components/ImgCarousel'
-import Top100 from './filters/Top100'
+import Top100Movies from './filters/Top100Movies'
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
             } />
             <Route path="/other" element={
               <div className='content'>
-                <Top100 />
+                <Top100Movies />
               </div>
             } />
           </Routes>

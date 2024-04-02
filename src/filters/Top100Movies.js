@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import './Top100.css'
+import './Top100Movies.css'
 const API_KEY = 'YOUR_API_KEY_HERE'
 
 export default function Movie() {

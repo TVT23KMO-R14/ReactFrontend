@@ -9,7 +9,7 @@ export default function Header({ onMovieSelect }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const Api_key = '53a7bc707469e2735d76b776a9b92595';
+    const Api_key = 'API_KEY';
 
     useEffect(() => {
         if (search === '') {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './Top100.css'
-const API_KEY = '53a7bc707469e2735d76b776a9b92595'
+const API_KEY = 'API_KEY'
 
 export default function Movie() {
     const [movies, setMovies] = useState([])

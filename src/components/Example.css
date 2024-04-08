@@ -1,0 +1,12 @@
+.header {
+    z-index: 1;
+}
+
+.modal-backdrop {
+    z-index: 9;
+}
+
+.modal {
+    z-index: 10;
+}
+

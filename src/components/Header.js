@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Header.css';
+import Example from './Example.js';
 
 export default function Header({ onMovieSelect }) {
     const [search, setSearch] = useState('');
@@ -84,7 +85,7 @@ export default function Header({ onMovieSelect }) {
                 <h2>Front Page</h2>
             </div>
             <div className='login'>
-                <a href='#'>Login</a>
+                <span>{Example()}</span>
                 <span className='material-symbols-outlined'>person</span>
             </div>
         </div>

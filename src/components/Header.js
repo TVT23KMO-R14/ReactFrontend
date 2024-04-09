@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Header.css';
 import Example from './Example';
+import LoginForm from './LoginForm';
+import LoginSignUpModal from './LoginSignUpModal';
 
 export default function Header({ onMovieSelect }) {
     const [search, setSearch] = useState('');
@@ -89,7 +91,7 @@ export default function Header({ onMovieSelect }) {
                 <h2>Front Page</h2>
             </div>
             <div className='login'>
-                <a href='#'>Login</a>
+                <span>{LoginSignUpModal()}</span>
                 <span className='material-symbols-outlined'>person</span>
             </div>
         </div>

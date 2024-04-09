@@ -1,7 +1,9 @@
-
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Header.css';
+import Example from './Login';
 
 export default function Header({ onMovieSelect }) {
     const [search, setSearch] = useState('');
@@ -54,6 +56,9 @@ export default function Header({ onMovieSelect }) {
     };
 
 
+          
+
+
     return (
         <div className='header'>
             <div className='search'>
@@ -84,9 +89,9 @@ export default function Header({ onMovieSelect }) {
                 <h2>Front Page</h2>
             </div>
             <div className='login'>
-                <a href='#'>Login</a>
-                <span className='material-symbols-outlined'>person</span>
+                <span>Example</span>
             </div>
         </div>
     );
 }
+

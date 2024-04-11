@@ -20,7 +20,7 @@ function App() {
 
   const handleMovieSelect = (movie) => {
     setSelectedMovie(movie);
-    navigate(`/movie/${movie.id}`); 
+    navigate(`/movie/${movie.id}`);
   };
 
   const showSidebar = location.pathname !== '/login';
@@ -30,26 +30,31 @@ function App() {
   return (
     <div className='viewport'>
       <div className='container'>
-      <Header setMovies={setMovies} onMovieSelect={handleMovieSelect} />
+        <Header setMovies={setMovies} onMovieSelect={handleMovieSelect} />
         <div className='main'>
-        {showSidebar && <Sidebar />}
+          {showSidebar && <Sidebar />}
           <Routes>
             <Route path='/' element={
               <div className='content'>
-              <Carousel />
-              <Content />
-            </div>
+                <Carousel />
+                <Content />
+              </div>
             } />
             <Route path="/other" element={
               <div className='content'>
                 <Top100 />
               </div>
             } />
-             <Route path="/movie/:id" element={<MovieCard movie={selectedMovie} />}/>
-            <Route path='/login' element={<Login />} />
+            <Route path="/movie/:id" element={<MovieCard movie={selectedMovie} />} />
+            <Route path='/login' element={
+              <div className='content'>
+                <Login />
+              </div>
+            } />
+
           </Routes>
         </div>
-       <Footer />
+        <Footer />
       </div>
     </div>
   );

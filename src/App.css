@@ -36,7 +36,7 @@
 
 .container .main {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   flex-direction: row;
   background: rgba(58, 81, 211, 0.2);
   flex: 1;
@@ -69,7 +69,7 @@
   box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.50);
 }
 
-div.content div:last-child, div.sidebar div.sidebarcontent:last-child {
+div.sidebar div.sidebarcontent:last-child {
   flex-grow: 1;
 }
 

@@ -36,7 +36,7 @@
 
 .container .main {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   flex-direction: row;
   background: rgba(58, 81, 211, 0.2);
   flex: 1;

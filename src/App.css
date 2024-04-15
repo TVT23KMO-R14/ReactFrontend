@@ -69,7 +69,7 @@
   box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.50);
 }
 
-div.content div:last-child, div.sidebar div.sidebarcontent:last-child {
+div.sidebar div.sidebarcontent:last-child {
   flex-grow: 1;
 }
 

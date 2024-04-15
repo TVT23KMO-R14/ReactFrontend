@@ -8,11 +8,14 @@ import Content from './components/Content'
 import Carousel from './components/ImgCarousel'
 import Top100 from './filters/Top100'
 import MovieCard from './components/MovieCard';
+import ShowtimeDetails from './components/ShowtimeDetails';
+import NewsDetails from './components/NewsFinnkino';
 import Login from './components/Login';
+
 
 function App() {
 
-  const [movies, setMovies] = useState([]);
+  const [setMovies] = useState([]);
 
   const [selectedMovie, setSelectedMovie] = useState(null);
   const navigate = useNavigate();
@@ -46,12 +49,13 @@ function App() {
               </div>
             } />
             <Route path="/movie/:id" element={<MovieCard movie={selectedMovie} />} />
+            <Route path='/showtimes' element={<ShowtimeDetails />} />
+            <Route path='/showtimes/news' element={<NewsDetails />} />
             <Route path='/login' element={
               <div className='content'>
                 <Login />
               </div>
             } />
-
           </Routes>
         </div>
         <Footer />

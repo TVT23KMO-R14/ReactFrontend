@@ -1,18 +1,7 @@
-/*import React from 'react'
-import './Footer.css'
-
-export default function Footer() {
-  return (
-    <div className="footer">
-            <h2>Footer</h2>
-    </div>
-  )
-}
-*/
 
 import React from 'react';
 import './Footer.css';
-import logo from '../image.png';  // Adjust this path to the exact location of your image within the src folder
+import logo from '../image.png'; 
 
 export default function Footer() {
   return (

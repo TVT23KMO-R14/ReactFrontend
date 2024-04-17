@@ -1,8 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import debounce from 'lodash.debounce';
 import './Header.css';
-import { Link } from "react-router-dom";
 
 export default function Header({ onMovieSelect }) {
     const [search, setSearch] = useState('');
@@ -10,55 +10,53 @@ export default function Header({ onMovieSelect }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const Api_key = '53a7bc707469e2735d76b776a9b92595';
+    // Suoritaa haun ja päivitä elokuvamuuttuja vastauksen mukaan. Debounce viive tapahtuu joka 300 ms
+    const debouncedSearch = useCallback(
+        debounce(async (searchTerm) => {
+            if (!searchTerm) return; 
+            setLoading(true);
+            setError('');
+            try {
+                const response = await axios.get('http://localhost:3000/search/headersearch', {
+                    params: { query: searchTerm }
+                });
+                setMovies([...response.data.movies, ...response.data.tvShows]);
+            } catch (err) {
+                setError(err.response && err.response.data.error ? err.response.data.error : 'Something did not work');
+            } finally {
+                setLoading(false);
+            }
+        }, 300),
+        [] 
+    );
 
     useEffect(() => {
         if (search === '') {
             setMovies([]);
+        } else {
+            debouncedSearch(search);
         }
-    }, [search]);
+        // Cancellataan haku jos haku postuu
+        return () => debouncedSearch.cancel();
+    }, [search, debouncedSearch]);
 
 
-    
-    const searchMovies = async (event) => {
-        event.preventDefault();
-        if (!search) return;
-        setLoading(true);
-        setError('');
-        try {
-            const response = await axios.get('https://api.themoviedb.org/3/search/movie', {
-                params: {
-                    api_key: Api_key,
-                    query: search,
-                    include_adult: false,
-                    language: 'en-US',
-                    page: 1
-                }
-            });
-            setMovies(response.data.results);
-        } catch (err) {
-            setError(err.response && err.response.data.message ? err.response.data.message : 'Something did not work');
-        } finally {
-            setLoading(false);
-        }
+    // Päivitää hakutermin, kun kirjoitetaa hakukenttään
+    const handleChange = (event) => {
+        setSearch(event.target.value);
     };
 
-    const handleChange = (e) => {
-        setSearch(e.target.value);
-    };
-
-
+    // hakutermit käsitellään
     const handleMovieSelection = (movie) => {
         onMovieSelect(movie);
         setMovies([]);
         setSearch('');
     };
 
-
     return (
         <div className='header'>
-            <div className='search'>
-                <form onSubmit={searchMovies}>
+            <div className='search-container'>
+                <form onSubmit={(e) => { e.preventDefault(); debouncedSearch(search); }}>
                     <input
                         type='text'
                         placeholder='Search'
@@ -69,27 +67,27 @@ export default function Header({ onMovieSelect }) {
                 </form>
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error}</p>}
-                {movies.length > 0 && (
-                    <ul className="list-group">
-                        {movies.map((movie, index) => (
-                            <li key={index} 
-                                className='list-group-item list-group-item-action' 
-                                onClick={() => handleMovieSelection(movie)}>
-                                {movie.title} ({movie.release_date ? movie.release_date.split('-')[0] : 'Unknown'})
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                <div className="search-results" style={{ display: movies.length > 0 ? 'block' : 'none' }}> {/* This div is for absolute positioning */}
+                <ul className="list-group">
+                    {movies.map((movie, index) => (
+                        <li key={index} 
+                            className='list-group-item list-group-item-action' 
+                            onClick={() => handleMovieSelection(movie)}>
+                            {movie.title} ({movie.release_date ? movie.release_date.split('-')[0] : 'Unknown'})
+                        </li>
+                    ))}
+                </ul>
+            </div>
             </div>
             <div className='title'>
                 <h2>Front Page</h2>
             </div>
             <div className='login'>
-                <li>
-                <Link to='/login'>Login <span className='material-symbols-outlined'>person</span></Link>
-                </li>
-                
+                <a href='#'>Login</a>
+                <span className='material-symbols-outlined'>person</span>
             </div>
         </div>
     );
 }
+
+

@@ -52,6 +52,10 @@ h2 {
 
 .search-container {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
 
 .search-form {
@@ -61,12 +65,13 @@ h2 {
 .search-results {
     position: absolute;
     width: 100%;
-    top: 100%; 
-    left: 0;
+    top: 100%;
+    left: 0;    
     background-color: white;
     box-shadow: 0px 4px 5px rgba(0,0,0,0.2);
     z-index: 9000; 
 }
+
 
 .search-result-item {
     padding: 10px;

@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import xml2js from 'xml2js';
 import './MainSidebar.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function MainSidebar() {
   const [showtimes, setShowtimes] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Hakee Helsigistä näytösaikoja
@@ -18,7 +19,7 @@ export default function MainSidebar() {
         const url = `https://www.finnkino.fi/xml/Schedule/?area=${areaId}&dt=${date}`;
         const result = await axios.get(url);
         const jsResult = await xml2js.parseStringPromise(result.data);
-        
+
         let futureShows = jsResult.Schedule.Shows[0].Show.filter(show => {
           const showStartTime = new Date(show.dttmShowStart[0]);
           return showStartTime > today;
@@ -40,8 +41,7 @@ export default function MainSidebar() {
     }, 900000);
 
     return () => clearInterval(interval);
-  }, []); 
-
+  }, []);
 
 
 
@@ -49,11 +49,15 @@ export default function MainSidebar() {
     <div className="sidebar">
       <div className='sidebarcontent moviefiltered'>
         <h2>Movies</h2>
-        <Link to='/other'><a href="#">Top 100</a></Link>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/top_rated' } }); }}>
+          Top 100
+        </a>
       </div>
       <div className='sidebarcontent tvseriesfiltered'>
         <h2>TV Series</h2>
-        <a href="#">Lorem.</a>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/top_rated' } }); }}>
+          Top 100
+        </a>
         <a href="#">Dolor!</a>
         <a href="#">Architecto?</a>
         <a href="#">Sapiente.</a>
@@ -63,16 +67,16 @@ export default function MainSidebar() {
         <a href="#">Architecto?</a>
         <a href="#">Soluta.</a>
         <a href="#">Assumenda!</a>
-      
+
       </div>
       <div className='sidebarcontent showtimes'>
-      <Link to={'/showtimes'}>
-        <h2>Showtimes</h2>
-      </Link>
-      {showtimes.map((show, index) => (
-        <div key={show.id}>{show.Theatre[0]} - {show.Title[0]} - {show.dttmShowStart[0]}</div>
-      ))}
-    </div>
+        <Link to={'/showtimes'}>
+          <h2>Showtimes</h2>
+        </Link>
+        {showtimes.map((show, index) => (
+          <div key={show.id}>{show.Theatre[0]} - {show.Title[0]} - {show.dttmShowStart[0]}</div>
+        ))}
+      </div>
     </div>
   )
 }

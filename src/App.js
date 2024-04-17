@@ -45,7 +45,7 @@ function App() {
                 <Content />
               </div>
             } />
-            <Route path="/other" element={
+            <Route path="/top100" element={
               <div className='content'>
                 <Top100 />
               </div>

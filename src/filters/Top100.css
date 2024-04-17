@@ -49,3 +49,13 @@
 .movie-top100:hover .layer {
     height: 100%;
 }
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+}
+
+#arrowback, #arrowforward {
+    cursor: pointer;
+    font-size: 3em;
+}

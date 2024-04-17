@@ -27,8 +27,10 @@ function App() {
   };
 
   const showSidebar = location.pathname !== '/login';
-  const showHeader = location.pathname !== '/login';
-  const showFooter = location.pathname !== '/login';
+  
+  //Näillä pystyy handlaa headerin ja footerin piilottamisen tarvittaessa.
+  //const showHeader = location.pathname !== '/login';
+  //const showFooter = location.pathname !== '/login'; 
 
   return (
     <div className='viewport'>

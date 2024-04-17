@@ -1,8 +1,8 @@
 
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Header.css';
-import { Link } from "react-router-dom";
 
 export default function Header({ onMovieSelect }) {
     const [search, setSearch] = useState('');
@@ -10,43 +10,15 @@ export default function Header({ onMovieSelect }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const Api_key = '53a7bc707469e2735d76b776a9b92595';
-
     useEffect(() => {
         if (search === '') {
             setMovies([]);
         }
     }, [search]);
 
-
-    
-    const searchMovies = async (event) => {
-        event.preventDefault();
-        if (!search) return;
-        setLoading(true);
-        setError('');
-        try {
-            const response = await axios.get('https://api.themoviedb.org/3/search/movie', {
-                params: {
-                    api_key: Api_key,
-                    query: search,
-                    include_adult: false,
-                    language: 'en-US',
-                    page: 1
-                }
-            });
-            setMovies(response.data.results);
-        } catch (err) {
-            setError(err.response && err.response.data.message ? err.response.data.message : 'Something did not work');
-        } finally {
-            setLoading(false);
-        }
+    const handleChange = (event) => {
+        setSearch(event.target.value);
     };
-
-    const handleChange = (e) => {
-        setSearch(e.target.value);
-    };
-
 
     const handleMovieSelection = (movie) => {
         onMovieSelect(movie);
@@ -54,6 +26,25 @@ export default function Header({ onMovieSelect }) {
         setSearch('');
     };
 
+const searchMovies = async (event) => {
+    event.preventDefault();
+    if (!search) return;
+    setLoading(true);
+    setError('');
+    try {
+        const response = await axios.get('http://localhost:3000/search/headersearch', {
+            params: {
+                page: 1,
+                query: search
+            }
+        });
+        setMovies([...response.data.movies, ...response.data.tvShows]); 
+    } catch (err) {
+        setError(err.response && err.response.data.error ? err.response.data.error : 'Something did not work');
+    } finally {
+        setLoading(false);
+    }
+};
 
     return (
         <div className='header'>
@@ -85,11 +76,10 @@ export default function Header({ onMovieSelect }) {
                 <h2>Front Page</h2>
             </div>
             <div className='login'>
-                <li>
-                <Link to='/login'>Login <span className='material-symbols-outlined'>person</span></Link>
-                </li>
-                
+                <a href='#'>Login</a>
+                <span className='material-symbols-outlined'>person</span>
             </div>
         </div>
     );
 }
+

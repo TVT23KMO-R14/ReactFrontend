@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 import './Header.css';
+import { Link } from "react-router-dom";
 
 export default function Header({ onMovieSelect }) {
     const [search, setSearch] = useState('');
@@ -13,7 +14,7 @@ export default function Header({ onMovieSelect }) {
     // Suoritaa haun ja päivitä elokuvamuuttuja vastauksen mukaan. Debounce viive tapahtuu joka 300 ms
     const debouncedSearch = useCallback(
         debounce(async (searchTerm) => {
-            if (!searchTerm) return; 
+            if (!searchTerm) return;
             setLoading(true);
             setError('');
             try {
@@ -27,7 +28,7 @@ export default function Header({ onMovieSelect }) {
                 setLoading(false);
             }
         }, 300),
-        [] 
+        []
     );
 
     useEffect(() => {
@@ -68,23 +69,24 @@ export default function Header({ onMovieSelect }) {
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error}</p>}
                 <div className="search-results" style={{ display: movies.length > 0 ? 'block' : 'none' }}> {/* This div is for absolute positioning */}
-                <ul className="list-group">
-                    {movies.map((movie, index) => (
-                        <li key={index} 
-                            className='list-group-item list-group-item-action' 
-                            onClick={() => handleMovieSelection(movie)}>
-                            {movie.title} ({movie.release_date ? movie.release_date.split('-')[0] : 'Unknown'})
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                    <ul className="list-group">
+                        {movies.map((movie, index) => (
+                            <li key={index}
+                                className='list-group-item list-group-item-action'
+                                onClick={() => handleMovieSelection(movie)}>
+                                {movie.title} ({movie.release_date ? movie.release_date.split('-')[0] : 'Unknown'})
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
             <div className='title'>
                 <h2>Front Page</h2>
             </div>
             <div className='login'>
-                <a href='#'>Login</a>
-                <span className='material-symbols-outlined'>person</span>
+                <li>
+                    <Link to='/login'>Login <span className='material-symbols-outlined'>person</span></Link>
+                </li>
             </div>
         </div>
     );

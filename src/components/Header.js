@@ -18,12 +18,12 @@ export default function Header({ onMovieSelect }) {
             setLoading(true);
             setError('');
             try {
-                const response = await axios.get('http://localhost:3000/search/headersearch', {
+                const response = await axios.get(process.env.REACT_APP_SERVER_URL + 'search/headersearch', {
                     params: { query: searchTerm }
                 });
                 setMovies([...response.data.movies, ...response.data.tvShows]);
             } catch (err) {
-                setError(err.response && err.response.data.error ? err.response.data.error : 'Something did not work');
+                setError(err.message || 'An error occurred');
             } finally {
                 setLoading(false);
             }
@@ -81,7 +81,7 @@ export default function Header({ onMovieSelect }) {
                 </div>
             </div>
             <div className='title'>
-                <h2>Front Page</h2>
+                <Link to='/'>Movie Mayhem</Link>
             </div>
             <div className='login'>
                 <li>

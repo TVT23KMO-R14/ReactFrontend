@@ -50,7 +50,7 @@ export default function Movie() {
         console.log(filter);
 
         try {
-            const response = await axios.get('http://localhost:3001/search/quicksearch', { params: { filter, page } });
+            const response = await axios.get(process.env.REACT_APP_SERVER_URL + 'search/quicksearch', { params: { filter, page } });
             console.log(response.data.results);
             console.log(response)
 

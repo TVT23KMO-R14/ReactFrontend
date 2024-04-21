@@ -33,7 +33,7 @@ function Login() {
     const handleLoginSubmit = async (event) => {
       event.preventDefault();
       console.log("Login form submitted");
-      const url = 'http://localhost:3001/auth/login'; // Adjust this URL based on your backend
+      const url = process.env.REACT_APP_SERVER_URL + 'auth/login'; // Adjust this URL based on your backend
       try {
           const response = await axios.post(url, loginData);
           console.log('Login successful:', response.data);
@@ -47,7 +47,7 @@ function Login() {
     const handleSignupSubmit = async (event) => {
       event.preventDefault();  // Prevent default form submission
       console.log("Signup form submitted");
-      const url = 'http://localhost:3001/auth/register';  // Replace with your backend endpoint
+      const url = process.env.REACT_APP_SERVER_URL + 'auth/register';  // Replace with your backend endpoint
       try {
         const response = await axios.post(url, signupData);
         console.log('Server response:', response.data);

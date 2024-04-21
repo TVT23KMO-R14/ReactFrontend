@@ -18,12 +18,13 @@ export default function Header({ onMovieSelect }) {
             setLoading(true);
             setError('');
             try {
-                const response = await axios.get('http://localhost:3000/search/headersearch', {
+                const response = await axios.get('http://localhost:3001/search/headersearch', {
                     params: { query: searchTerm }
                 });
                 setMovies([...response.data.movies, ...response.data.tvShows]);
             } catch (err) {
-                setError(err.response && err.response.data.error ? err.response.data.error : 'Something did not work');
+                setError(err.message);
+                console.log(err);
             } finally {
                 setLoading(false);
             }

@@ -11,6 +11,8 @@ import MovieCard from './components/MovieCard';
 import ShowtimeDetails from './components/ShowtimeDetails';
 import NewsDetails from './components/NewsFinnkino';
 import Login from './components/Login';
+import UserView from './components/UserView';
+import UserProvider from './context/UserProvider';
 
 
 function App() {
@@ -27,42 +29,45 @@ function App() {
   };
 
   const showSidebar = location.pathname !== '/login';
-  
+
   //Näillä pystyy handlaa headerin ja footerin piilottamisen tarvittaessa.
   //const showHeader = location.pathname !== '/login';
   //const showFooter = location.pathname !== '/login'; 
 
   return (
-    <div className='viewport'>
-      <div className='container'>
-        <Header setMovies={setMovies} onMovieSelect={handleMovieSelect} />
-        <div className='main'>
-          {showSidebar && <Sidebar />}
-          <Routes>
-            <Route path='/' element={
-              <div className='content'>
-                <Carousel />
-                <Content />
-              </div>
-            } />
-            <Route path="/top100" element={
-              <div className='content'>
-                <Top100 />
-              </div>
-            } />
-            <Route path="/movie/:id" element={<MovieCard movie={selectedMovie} />} />
-            <Route path='/showtimes' element={<ShowtimeDetails />} />
-            <Route path='/showtimes/news' element={<NewsDetails />} />
-            <Route path='/login' element={
-              <div className='content'>
-                <Login />
-              </div>
-            } />
-          </Routes>
+    <UserProvider>
+      <div className='viewport'>
+        <div className='container'>
+          <Header setMovies={setMovies} onMovieSelect={handleMovieSelect} />
+          <div className='main'>
+            {showSidebar && <Sidebar />}
+            <Routes>
+              <Route path='/' element={
+                <div className='content'>
+                  <Carousel />
+                  <Content />
+                </div>
+              } />
+              <Route path="/top100" element={
+                <div className='content'>
+                  <Top100 />
+                </div>
+              } />
+              <Route path="/movie/:id" element={<MovieCard movie={selectedMovie} />} />
+              <Route path='/showtimes' element={<ShowtimeDetails />} />
+              <Route path='/showtimes/news' element={<NewsDetails />} />
+              <Route path='/login' element={
+                <div className='content'>
+                  <Login />
+                </div>
+              } />
+              <Route path='/userview' element={<UserView />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
-    </div>
+    </UserProvider>
   );
 }
 

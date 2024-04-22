@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import './Login.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; // Make sure your project setup supports CSS imports like this
 import  axios  from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+    const navigate = useNavigate()
     const [loginData, setLoginData] = useState ({
       userName: '',
       password: ''
@@ -17,10 +19,13 @@ function Login() {
       password: ''
     });
 
-    const handleLoginChange = (e) => {
-      const { name, value } = e.target;
-      setLoginData(prev => ({ ...prev, [name]: value }));
-  };
+  const handleLoginChange = (event) => {
+    setLoginData({
+        ...loginData,
+        [event.target.name]: event.target.value
+    });
+};
+
   
     const handleSignupChange = (e) => {
       const { name, value } = e.target;
@@ -37,6 +42,11 @@ function Login() {
       try {
           const response = await axios.post(url, loginData);
           console.log('Login successful:', response.data);
+          console.log(response.data.jwtToken)
+          console.log(Object.keys(response.data.jwtToken).length)
+          if (Object.keys(response.data.jwtToken).length > 10) {
+            navigate('/userview')
+          }
           // Handle login success (e.g., storing the token, redirecting)
       } catch (error) {
           console.error('Login failed:', error);

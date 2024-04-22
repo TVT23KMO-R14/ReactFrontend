@@ -4,6 +4,7 @@ import axios from 'axios';
 import debounce from 'lodash.debounce';
 import './Header.css';
 import { Link } from "react-router-dom";
+import { useUser } from '../context/useUser';
 
 export default function Header({ onMovieSelect }) {
     const [search, setSearch] = useState('');

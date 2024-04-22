@@ -59,14 +59,14 @@
   .signup {
     height: 460px;
     border-radius: 60% / 10%;
-    background-color: rgb(249, 3, 3);
+    background: linear-gradient(to top, #000, #444, #888);
     transform: translateY(-180px);
     transition: .8s ease-in-out;
   }
   
   .signup label {
     transform: scale(.6);
-    color: #000;
+    color: white;
   }
   
   .loginbody button {

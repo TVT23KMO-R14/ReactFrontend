@@ -11,6 +11,7 @@ import MovieCard from './components/MovieCard';
 import ShowtimeDetails from './components/ShowtimeDetails';
 import NewsDetails from './components/NewsFinnkino';
 import Login from './components/Login';
+import CreateGroup from './components/CreateGroup'
 import UserView from './components/UserView';
 import UserProvider from './context/UserProvider';
 
@@ -53,6 +54,7 @@ function App() {
                   <Top100 />
                 </div>
               } />
+              <Route path='/creategroup' element={<CreateGroup />} />
               <Route path="/movie/:id" element={<MovieCard movie={selectedMovie} />} />
               <Route path='/showtimes' element={<ShowtimeDetails />} />
               <Route path='/showtimes/news' element={<NewsDetails />} />

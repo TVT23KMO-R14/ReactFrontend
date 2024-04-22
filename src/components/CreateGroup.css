@@ -1,0 +1,23 @@
+.container-sm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.group-logo img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    cursor: pointer;
+    margin: .6em;
+}
+
+.group-logo img:hover {
+    opacity: 0.7;
+}
+
+.selected {
+    border: 4px solid #AAFF00
+}

@@ -34,26 +34,26 @@ export default function Header({ onMovieSelect }) {
 
     useEffect(() => {
         if (search === '') {
-            setMovies([]);
+            setMovies([])
         } else {
-            debouncedSearch(search);
+            debouncedSearch(search)
         }
         // Cancellataan haku jos haku postuu
-        return () => debouncedSearch.cancel();
-    }, [search, debouncedSearch]);
+        return () => debouncedSearch.cancel()
+    }, [search, debouncedSearch])
 
 
     // Päivitää hakutermin, kun kirjoitetaa hakukenttään
     const handleChange = (event) => {
-        setSearch(event.target.value);
+        setSearch(event.target.value)
     };
 
     // hakutermit käsitellään
     const handleMovieSelection = (movie) => {
-        onMovieSelect(movie);
-        setMovies([]);
-        setSearch('');
-    };
+        onMovieSelect(movie)
+        setMovies([])
+        setSearch('')
+    }
 
     return (
         <div className='header'>
@@ -90,7 +90,7 @@ export default function Header({ onMovieSelect }) {
                 </li>
             </div>
         </div>
-    );
+    )
 }
 
 

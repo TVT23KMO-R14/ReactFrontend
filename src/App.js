@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import React, { useState } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
@@ -14,6 +15,8 @@ import Login from './components/Login';
 import CreateGroup from './components/CreateGroup'
 import UserView from './components/UserView';
 import UserProvider from './context/UserProvider';
+import ReviewMovie from './components/ReviewMovie';
+import MoviePage from './pages/MoviePage'
 
 
 function App() {
@@ -55,7 +58,13 @@ function App() {
                 </div>
               } />
               <Route path='/creategroup' element={<CreateGroup />} />
-              <Route path="/movie/:id" element={<MovieCard movie={selectedMovie} />} />
+              <Route path="/movie/:id" element={
+                <div className='content'>
+                <MovieCard movie={selectedMovie} />
+                <ReviewMovie />
+                </div>
+              } />
+              <Route path='/moviepage/:id' element={<MoviePage />} />
               <Route path='/showtimes' element={<ShowtimeDetails />} />
               <Route path='/showtimes/news' element={<NewsDetails />} />
               <Route path='/login' element={

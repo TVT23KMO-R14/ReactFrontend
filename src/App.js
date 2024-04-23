@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/MainSidebar'
@@ -11,6 +11,7 @@ import MovieCard from './components/MovieCard';
 import ShowtimeDetails from './components/ShowtimeDetails';
 import NewsDetails from './components/NewsFinnkino';
 import Login from './components/Login';
+import SearchResultsPage from './components/SearchPage';
 
 
 function App() {
@@ -32,6 +33,12 @@ function App() {
   //const showHeader = location.pathname !== '/login';
   //const showFooter = location.pathname !== '/login'; 
 
+/*
+  const handleGenreSelect = (genre) => {
+    console.log("Selected Genre:", genre.name);
+    // Further actions based on the genre selection
+};*/
+
   return (
     <div className='viewport'>
       <div className='container'>
@@ -51,6 +58,7 @@ function App() {
               </div>
             } />
             <Route path="/movie/:id" element={<MovieCard movie={selectedMovie} />} />
+            <Route path='/search' element={<SearchResultsPage />} />
             <Route path='/showtimes' element={<ShowtimeDetails />} />
             <Route path='/showtimes/news' element={<NewsDetails />} />
             <Route path='/login' element={

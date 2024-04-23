@@ -6,11 +6,11 @@ export default function CreateGroup() {
     const [groupName, setGroupName] = useState('')
     const [groupDescription, setGroupDescription] = useState('')
     const [groupLogo, setGroupLogo] = useState('')
-    const groupLogos = ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhXHexrsxFo3bjz1VXHPV-JEyyasQKUNLyDIqpF3tEqg&s',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmmKhbqOk8e2qcnrnNuhwjJmpQaSNLUhBclUF0JNjxww&s',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkgDvRI83m237tEJ-Jji9OZtBJzw9_cBH36wm8YJWNRQ&s',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJxxty2skHp4Mjlt1Rlcra-BcA2rGJsC1NnE_vxBW0_g&s',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7skqIGf4c94Mk9_PnyILXxK9dGTRmbWVT9tDmI22jzA&s'];
+    const groupLogos = ['./img/baseball.jpg',
+        './img/moon.png',
+        './img/rocket.png',
+        './img/apple.png',
+        './img/calculator.png'];
 
     const handleSubmit = async (event) => {
         event.preventDefault();

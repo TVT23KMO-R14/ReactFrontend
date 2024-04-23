@@ -3,8 +3,10 @@ import React from 'react';
 import './Header.css';
 import { Link } from "react-router-dom";
 import SearchComponent from './SearchComponent';
+import { useUser } from '../context/useUser';
 
 export default function Header({ onMovieSelect}) {
+    
 
     return (
         <div className='header'>
@@ -18,5 +20,5 @@ export default function Header({ onMovieSelect}) {
                 </li>
             </div>
         </div>
-    );
+    )
 }

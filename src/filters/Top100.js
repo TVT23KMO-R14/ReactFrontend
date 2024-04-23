@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './Top100.css'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export default function Movie() {
     const [movies, setMovies] = useState([])
     const [page, setPage] = useState(1);
     const [lastFilter, setLastFilter] = useState('');
     const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log(location.state);
@@ -53,7 +54,8 @@ export default function Movie() {
             const response = await axios.get(process.env.REACT_APP_SERVER_URL + 'search/quicksearch', { params: { filter, page } });
             console.log(response.data.results);
             console.log(response)
-
+            response.data.results.filter = filter;
+            console.log(response.data.results.filter);
             //allMovies.push(...response.data.results)
             setMovies(response.data.results);
             //console.log(allMovies);
@@ -64,6 +66,7 @@ export default function Movie() {
         }
     };
 
+    
 
     return (
         <div className='quicksearch-container'>
@@ -77,7 +80,7 @@ export default function Movie() {
             </div>
             <div className='movie-list-top100'>
                 {movies.map((movie) => (
-                    <div key={movie.id}>
+                    <div key={movie.id} onClick={() => navigate(`/moviepage/${movie.id}`)}>
                         <div className='movie-top100'>
                             <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}></img>
                             <div className='layer'>

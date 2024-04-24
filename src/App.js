@@ -46,36 +46,26 @@ function App() {
           <Header setMovies={setMovies} onMovieSelect={handleMovieSelect} />
           <div className='main'>
             {showSidebar && <Sidebar />}
-            <Routes>
-              <Route path='/' element={
-                <div className='content'>
+            <div className='content'>
+              <Routes>
+                  <Route path='/' element={<>
                   <Carousel />
                   <Content />
-                </div>
-              } />
-              <Route path="/top100" element={
-                <div className='content'>
-                  <Top100 />
-                </div>
-              } />
-              <Route path='/creategroup' element={<CreateGroup />} />
-              <Route path="/movie/:id" element={
-                <div className='content'>
-                <MovieCard movie={selectedMovie} />
-                <ReviewMovie />
-                </div>
-              } />
-              <Route path='/moviepage/:id' element={<MoviePage />} />
-              <Route path='/search' element={<SearchResultsPage />} />
-              <Route path='/showtimes' element={<ShowtimeDetails />} />
-              <Route path='/showtimes/news' element={<NewsDetails />} />
-              <Route path='/login' element={
-                <div className='content'>
-                  <Login />
-                </div>
-              } />
-              <Route path='/userview' element={<UserView />} />
-            </Routes>
+                </>} />
+                <Route path="/top100" element={<Top100 />} />
+                <Route path='/creategroup' element={<CreateGroup />} />
+                <Route path="/movie/:id" element={<>
+                  <MovieCard movie={selectedMovie} />
+                  <ReviewMovie />
+                </>} />
+                <Route path='/moviepage/:id' element={<MoviePage />} />
+                <Route path='/search' element={<SearchResultsPage />} />
+                <Route path='/showtimes' element={<ShowtimeDetails />} />
+                <Route path='/showtimes/news' element={<NewsDetails />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/userview' element={<UserView />} />
+              </Routes>
+            </div>
           </div>
           <Footer />
         </div>

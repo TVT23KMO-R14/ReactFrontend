@@ -9,9 +9,6 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom'
 
 
 
-
-
-
 export default function ReviewMovie({ movie }) {
 
     const navigate = useNavigate()

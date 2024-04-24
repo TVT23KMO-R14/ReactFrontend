@@ -52,7 +52,7 @@ function App() {
                   <Carousel />
                   <Content />
                 </>} />
-                <Route path="/movies/:type" element={<Top100 />} />
+                <Route path="/top100" element={<Top100 />} />
                 <Route path='/creategroup' element={<CreateGroup />} />
                 <Route path="/movie/:id" element={<>
                   <MovieCard movie={selectedMovie} />

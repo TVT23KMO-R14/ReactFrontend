@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/MainSidebar'
@@ -17,6 +17,7 @@ import UserView from './components/UserView';
 import UserProvider from './context/UserProvider';
 import ReviewMovie from './components/ReviewMovie';
 import MoviePage from './pages/MoviePage'
+import SearchResultsPage from './components/SearchPage';
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
                 </div>
               } />
               <Route path='/moviepage/:id' element={<MoviePage />} />
+              <Route path='/search' element={<SearchResultsPage />} />
               <Route path='/showtimes' element={<ShowtimeDetails />} />
               <Route path='/showtimes/news' element={<NewsDetails />} />
               <Route path='/login' element={

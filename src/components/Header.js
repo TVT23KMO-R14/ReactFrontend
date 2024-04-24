@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 import { useUser } from '../context/useUser';
 import SearchComponent from './SearchComponent';
 
-export default function Header({ onMovieSelect }) {
+
+export default function Header({ onMovieSelect,  setShowAdvancedSearch }) {
 
 
     return (
         <div className='header'>
-           <SearchComponent onMovieSelect={onMovieSelect}/>
+          <SearchComponent onMovieSelect={onMovieSelect} 
+           setShowAdvancedSearch={setShowAdvancedSearch}/>
             <div className='title'>
                 <Link to='/'>Movie Mayhem</Link>
             </div>

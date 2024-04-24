@@ -18,7 +18,7 @@ import UserProvider from './context/UserProvider';
 import ReviewMovie from './components/ReviewMovie';
 import MoviePage from './pages/MoviePage'
 import SearchResultsPage from './components/SearchPage';
-import SeriesPage from './pages/SeriesPage';
+
 
 function App() {
 
@@ -52,14 +52,13 @@ function App() {
                   <Carousel />
                   <Content />
                 </>} />
-                <Route path="/movies/:type" element={<Top100 />} />
+                <Route path="/top100" element={<Top100 />} />
                 <Route path='/creategroup' element={<CreateGroup />} />
                 <Route path="/movie/:id" element={<>
                   <MovieCard movie={selectedMovie} />
                   <ReviewMovie />
                 </>} />
                 <Route path='/moviepage/:id' element={<MoviePage />} />
-                <Route path='/seriespage/:id' element={<SeriesPage />} />
                 <Route path='/search' element={<SearchResultsPage />} />
                 <Route path='/showtimes' element={<ShowtimeDetails />} />
                 <Route path='/showtimes/news' element={<NewsDetails />} />

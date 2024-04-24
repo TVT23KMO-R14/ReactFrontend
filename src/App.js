@@ -19,6 +19,8 @@ import ReviewMovie from './components/ReviewMovie';
 import MoviePage from './pages/MoviePage'
 import SearchResultsPage from './components/SearchPage';
 import SeriesPage from './pages/SeriesPage';
+import UserViewPage from './pages/UserViewPage';
+import Logout from './components/Logout';
 
 function App() {
 
@@ -64,7 +66,8 @@ function App() {
                 <Route path='/showtimes' element={<ShowtimeDetails />} />
                 <Route path='/showtimes/news' element={<NewsDetails />} />
                 <Route path='/login' element={<Login />} />
-                <Route path='/userview' element={<UserView />} />
+                <Route path='/userview' element={<UserViewPage />} />
+                <Route path='/logout' element={<Logout />} />
               </Routes>
             </div>
           </div>

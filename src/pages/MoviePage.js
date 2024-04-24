@@ -1,15 +1,15 @@
-import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import MovieCard from '../components/MovieCard'
 import ReviewMovie from '../components/ReviewMovie'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { useUser } from '../context/useUser'
 
 export default function MovieView() { 
     
         const [movie, setMovie] = useState(null)
         const { id } = useParams()
-        const navigate = useNavigate()
+        const { user } = useUser()
     
         React.useEffect(() => {
             const fetchMovie = async () => {
@@ -31,7 +31,7 @@ export default function MovieView() {
         return (
             <div>
                 <MovieCard movie={movie} />
-                <ReviewMovie movie={movie} />
+                {user && <ReviewMovie movie={movie} />}
             </div>
         )
     

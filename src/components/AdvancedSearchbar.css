@@ -1,0 +1,11 @@
+.sidebar_search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #ffffff;
+    text-decoration: none;
+    color: #000;
+    border-radius: 10px;
+
+}

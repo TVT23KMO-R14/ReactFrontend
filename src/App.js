@@ -22,6 +22,7 @@ import SearchResultsPage from './components/SearchPage';
 import SeriesPage from './pages/SeriesPage';
 import UserViewPage from './pages/UserViewPage';
 import Logout from './components/Logout';
+import AdvancedSearchbar from './components/AdvancedSearchbar';
 
 function App() {
 
@@ -42,11 +43,24 @@ function App() {
   //const showHeader = location.pathname !== '/login';
   //const showFooter = location.pathname !== '/login'; 
 
+  const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
+  const [fromYear, setFromYear] = useState('');
+  const [toYear, setToYear] = useState('');
+
+  useEffect(() => {
+    if (location.pathname !== '/search') {
+      setShowAdvancedSearch(false);
+    }
+  }, [location]);
+
   return (
     <UserProvider>
       <div className='viewport'>
         <div className='container'>
-          <Header setMovies={setMovies} onMovieSelect={handleMovieSelect} />
+          <Header setMovies={setMovies} onMovieSelect={handleMovieSelect}
+          setShowAdvancedSearch={setShowAdvancedSearch}  />
+          {showAdvancedSearch && <AdvancedSearchbar  setFromYear={setFromYear}
+            toYear={toYear} setToYear={setToYear} />}
           <div className='main'>
             {showSidebar && <Sidebar />}
             <div className='content'>
@@ -64,7 +78,7 @@ function App() {
                 </>} />
                 <Route path='/moviepage/:id' element={<MoviePage />} />
                 <Route path='/seriespage/:id' element={<SeriesPage />} />
-                <Route path='/search' element={<SearchResultsPage />} />
+                <Route path='/search' element={<SearchResultsPage fromYear={fromYear} toYear={toYear}/>} />
                 <Route path='/showtimes' element={<ShowtimeDetails />} />
                 <Route path='/showtimes/news' element={<NewsDetails />} />
                 <Route path='/login' element={<Login />} />

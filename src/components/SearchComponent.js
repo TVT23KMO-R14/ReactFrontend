@@ -3,9 +3,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 import { useNavigate } from 'react-router-dom';
-//import './AdvancedSearchbar';
+import './AdvancedSearchbar';
 
-export default function SearchComponent({ onMovieSelect}) {
+export default function SearchComponent({ onMovieSelect,setShowAdvancedSearch }) {
     const [search, setSearch] = useState('');
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -44,18 +44,19 @@ export default function SearchComponent({ onMovieSelect}) {
 
 const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    setSearchButtonPressed(true); 
-    debouncedSearch(search); // tekee haun ja laittaa movies staten
+    setSearchButtonPressed(true); // Set the state to indicate the button has been pressed
+    debouncedSearch(search); // This will perform the search and set the movies state.
 };
 
-// Kun debounceSearch on tehty movies state päivitetään viimeisellä haulla
+// After debouncedSearch is called, the movies state will be updated with the latest search results.
 useEffect(() => {
     if (movies.length > 0 && searchButtonPressed) {
         navigate('/search', { state: { results: movies } });
-       // setShowAdvancedSearch(true);
-        setSearchButtonPressed(false); 
+        //navigate(`/search?fromYear=${inputFromYear}`, { state: { results: searchResults } });
+        setShowAdvancedSearch(true);
+        setSearchButtonPressed(false); // Reset the state after navigation
     }
-}, [movies, navigate, searchButtonPressed]);
+}, [movies, navigate, searchButtonPressed,  setShowAdvancedSearch]);
     
     useEffect(() => {
         if (search === '') {
@@ -82,12 +83,15 @@ useEffect(() => {
 
 
 
+
+    // try too
     useEffect(() => {
         if (search) {
             debouncedSearch(search);
         }
         return () => debouncedSearch.cancel();
     }, [search, debouncedSearch]);
+    //end
 
     return (
         <div className='search-container'>

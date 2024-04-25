@@ -17,6 +17,9 @@ export default function MovieCard({movie}) {
             <div className='card-body' style={{ flex: '1'}}>
                 <h5 className='card-title'>{movie.title}</h5>
                 <p className='card-text'>{movie.overview}</p>
+                <p className='card-text'>{movie.release_date ? `Release Date: ${movie.release_date}`
+                        : movie.first_air_date ? `First Air Date: ${movie.first_air_date}`
+                            : 'Date Unknown'} </p>
             </div>
         </div>
     );

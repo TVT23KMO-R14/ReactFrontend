@@ -1,12 +1,13 @@
 
 import React, { useEffect, useState, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './SearchPage.css';
 
 const SearchResultsPage = ({ fromYear, toYear }) => {
    
     const location = useLocation();
     const [results, setResults] = useState([]);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -26,24 +27,31 @@ const SearchResultsPage = ({ fromYear, toYear }) => {
             return fromYearCheck && toYearCheck;
         });
     }, [fromYear, toYear, results]);
-    
+  
 
-    const movieItems = filteredResults.map((movie) => (
-        <div key={movie.id} className="movie-item">
-            <img
-                className='movie-poster'
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={`${movie.title || movie.name} Poster`}
-            />
-            <div className="movie-info">
-                <h4>{movie.title || movie.name}</h4>
-                <p>{movie.release_date ? `Release Date: ${movie.release_date}`
-                    : movie.first_air_date ? `First Air Date: ${movie.first_air_date}`
-                        : 'Date Unknown'}
-                </p>
+    const movieItems = filteredResults.map((movie) => {
+        const isMovie = movie.hasOwnProperty('title');
+      
+        // Navigoi riippuen jos tulos on elokuva tai tv sarja
+        const navigateUrl = isMovie ? `/moviepage/${movie.id}` : `/seriespage/${movie.id}`;
+    
+        return (
+            <div key={movie.id} onClick={() => navigate(navigateUrl)} className="movie-item">
+                <img
+                    className='movie-poster'
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={`${movie.title || movie.name} Poster`}
+                />
+                <div className="movie-info">
+                    <h4>{movie.title || movie.name}</h4>
+                    <p>{movie.release_date ? `Release Date: ${movie.release_date}`
+                        : movie.first_air_date ? `First Air Date: ${movie.first_air_date}`
+                            : 'Date Unknown'}
+                    </p>
+                </div>
             </div>
-        </div>
-    ));
+        );
+    });
 
     return (
         <div className='content'>

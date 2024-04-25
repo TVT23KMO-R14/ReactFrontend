@@ -1,6 +1,7 @@
 .sidebar_search {
     display: flex;
-    justify-content: start;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     background: #ffffff;
     text-decoration: none;

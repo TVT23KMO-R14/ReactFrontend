@@ -1,32 +1,16 @@
 
-import React, { useState, useCallback, useEffect } from 'react'
+import React from 'react'
 import './AdvancedSearchbar.css';
 import './SearchComponent';
-import debounce from 'lodash.debounce';
-//import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
 
-
-
-
-export default function AdvancedSearchbar({ onGenreSelect, setShowAdvancedSearch,fromYear, setFromYear  }) {
+export default function AdvancedSearchbar({ fromYear, setFromYear, toYear, setToYear   }) {
 
     const navigate = useNavigate();
 
 
-
-    //const [fromYear, setFromYear] = useState('');
-    const [toYear, setToYear] = useState('');
-
-   /* const handleFromYear = (event) => {
-        setFromYear(event.target.value);
-        console.log(event.target.value);
-        //debouncedNavigate(event.target.value)
-    };*/
-
-    // new  
     const handleFromYear = (event) => {
     setFromYear(event.target.value);
 };
@@ -71,18 +55,3 @@ export default function AdvancedSearchbar({ onGenreSelect, setShowAdvancedSearch
         </div>
     )
 }
-/*  <button onClick={applyFromYearFilter}>Apply Year Filter</button> */
-
-
-/*
-// test filtering
-const applyFromYearFilter = () => {
-    // Filter the movies before navigation
-    const filteredMovies = movies.filter(movie => {
-        const releaseYear = movie.release_date ? new Date(movie.release_date).getFullYear() : null;
-        return releaseYear ? releaseYear >= parseInt(fromYear, 10) : false;
-    });
-
-    // Navigate with the new fromYear parameter and pass along the filtered movies
-    navigate(`/search?fromYear=${fromYear}`, { state: { results: filteredMovies } });
-};*/

@@ -42,6 +42,7 @@ function App() {
 
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
   const [fromYear, setFromYear] = useState('');
+  const [toYear, setToYear] = useState('');
 
   useEffect(() => {
     if (location.pathname !== '/search') {
@@ -55,7 +56,8 @@ function App() {
         <div className='container'>
           <Header setMovies={setMovies} onMovieSelect={handleMovieSelect}
           setShowAdvancedSearch={setShowAdvancedSearch}  />
-          {showAdvancedSearch && <AdvancedSearchbar  setFromYear={setFromYear} />}
+          {showAdvancedSearch && <AdvancedSearchbar  setFromYear={setFromYear}
+            toYear={toYear} setToYear={setToYear} />}
           <div className='main'>
             {showSidebar && <Sidebar />}
             <div className='content'>
@@ -72,7 +74,7 @@ function App() {
                 </>} />
                 <Route path='/moviepage/:id' element={<MoviePage />} />
                 <Route path='/seriespage/:id' element={<SeriesPage />} />
-                <Route path='/search' element={<SearchResultsPage fromYear={fromYear} />} />
+                <Route path='/search' element={<SearchResultsPage fromYear={fromYear} toYear={toYear}/>} />
                 <Route path='/showtimes' element={<ShowtimeDetails />} />
                 <Route path='/showtimes/news' element={<NewsDetails />} />
                 <Route path='/login' element={<Login />} />

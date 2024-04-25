@@ -13,6 +13,7 @@ import ShowtimeDetails from './components/ShowtimeDetails';
 import NewsDetails from './components/NewsFinnkino';
 import Login from './components/Login';
 import CreateGroup from './components/CreateGroup'
+import GroupPage from './pages/GroupPage';
 import UserView from './components/UserView';
 import UserProvider from './context/UserProvider';
 import ReviewMovie from './components/ReviewMovie';
@@ -68,6 +69,7 @@ function App() {
                 </>} />
                 <Route path="/top100" element={<Top100 />} />
                 <Route path='/creategroup' element={<CreateGroup />} />
+                <Route path='/grouppage' element={<GroupPage />} />
                 <Route path="/movie/:id" element={<>
                   <MovieCard movie={selectedMovie} />
                   <ReviewMovie />

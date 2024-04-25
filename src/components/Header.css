@@ -9,7 +9,7 @@
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.50);
     height: 3rem;
     position: relative; 
-    z-index: 9999;
+    /*z-index: 9999;*/
   }
 
 .header .search {
@@ -24,6 +24,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    background-color: black;
 }
 
 .header .login {

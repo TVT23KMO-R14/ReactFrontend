@@ -53,6 +53,7 @@ export default function MainSidebar() {
           Top 100
         </a>
         <Link to='/creategroup'><button>Create Group</button></Link>
+        <Link to='/grouppage'><button>Group Page</button></Link>
       </div>
       <div className='sidebarcontent tvseriesfiltered'>
         <h2>TV Series</h2>

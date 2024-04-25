@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useUser } from '../context/useUser';
 import SearchComponent from './SearchComponent';
 import LoginStatus from './LoginStatus';
-
+import Icon from './icon'
 
 export default function Header({ onMovieSelect }) {
 
@@ -13,7 +13,7 @@ export default function Header({ onMovieSelect }) {
         <div className='header'>
             <SearchComponent onMovieSelect={onMovieSelect} />
             <div className='title'>
-                <Link to='/'>Movie Mayhem</Link>
+                <Link to='/'><Icon /></Link>
             </div>
             <LoginStatus />
         </div>

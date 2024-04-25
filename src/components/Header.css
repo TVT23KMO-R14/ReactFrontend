@@ -29,7 +29,7 @@
 
 .header .login {
     display: flex;
-    align-items: end;
+    align-items: center;
     justify-content: end;
     flex-direction: row;
     flex: 1;

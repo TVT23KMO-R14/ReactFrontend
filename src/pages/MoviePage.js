@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MovieCard from '../components/MovieCard'
 import ReviewMovie from '../components/ReviewMovie'
 import { useParams } from 'react-router-dom'
@@ -11,7 +11,7 @@ export default function MovieView() {
         const { id } = useParams()
         const { user } = useUser()
     
-        React.useEffect(() => {
+        useEffect(() => {
             const fetchMovie = async () => {
                 try {
                     const response = await axios.get(process.env.REACT_APP_SERVER_URL + 'search/onemovie', {

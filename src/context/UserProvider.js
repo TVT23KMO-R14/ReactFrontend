@@ -18,10 +18,12 @@ export default function UserProvider({children}) {
     const url = process.env.REACT_APP_SERVER_URL + 'auth/login'
     axios.post(url,json,options)
       .then(response => {
-        console.log(response.data.jwtToken)
+        console.log('jwtToken: ',response.data.jwtToken)
+        console.log('id: ',response.data.id)
         const token = response.data.jwtToken
-        console.log({...data,"token":token})
+        const id = response.data.id
         setUser({...data,"token":token})
+        setUser({...data,"id":id})
         sessionStorage.setItem("user", user)
         navigate("/userview")
       })

@@ -3,7 +3,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './SearchPage.css';
 
-const SearchResultsPage = ({ fromYear, toYear }) => {
+const SearchResultsPage = ({ fromYear, toYear, selectedGenreId }) => {
    
     const location = useLocation();
     const [results, setResults] = useState([]);
@@ -13,9 +13,12 @@ const SearchResultsPage = ({ fromYear, toYear }) => {
     useEffect(() => {
         if (location.state?.results) {
             setResults(location.state.results);
+            
         }
     }, [location]);
-
+    
+    //useMemo muistaa filteröidyt tulokset julkiaisu vuodella ja genrellä,
+    // näyttää rajatut tulokset halutuilla rajoituksilla
     const filteredResults = useMemo(() => {
         return results.filter(movie => {
             const releaseDate = movie.release_date || movie.first_air_date;
@@ -24,9 +27,14 @@ const SearchResultsPage = ({ fromYear, toYear }) => {
             const releaseYear = parseInt(releaseDate.split('-')[0], 10);
             const fromYearCheck = !fromYear || releaseYear >= parseInt(fromYear, 10);
             const toYearCheck = !toYear || releaseYear <= parseInt(toYear, 10);
-            return fromYearCheck && toYearCheck;
+
+            const genreCheck = !selectedGenreId || movie.genre_ids.includes(selectedGenreId);
+            //console.log("Current selected genre ID:", selectedGenreId);
+
+            
+            return fromYearCheck && toYearCheck && genreCheck;
         });
-    }, [fromYear, toYear, results]);
+    }, [fromYear, toYear, results, selectedGenreId]);
   
 
     const movieItems = filteredResults.map((movie) => {
@@ -61,7 +69,7 @@ const SearchResultsPage = ({ fromYear, toYear }) => {
                         {movieItems}
                     </div>
                 ) : (
-                    <p>No movies or tv shows found for the wanted year.</p>
+                    <p>No movies or tv shows found.</p>
                 )}
             </div>
         </div>

@@ -21,8 +21,16 @@ export default function CreateGroup() {
         }
 
         try {
+            const user_idUser= JSON.parse(sessionStorage.getItem('id'));
+            console.log(user_idUser);
+
             const response = await axios.post('http://localhost:3000/group/add', { groupName: groupName, groupDescription: groupDescription, groupLogo: groupLogo });
             console.log(response.data);
+
+            const group_idGroup = response.data.result.idGroup;
+            console.log(group_idGroup);
+
+            await axios.post('http://localhost:3000/groupmember/add', { userId: user_idUser, groupId: group_idGroup, role: 'admin'})
             
         } catch (error) {
             console.error('Error adding group', error);

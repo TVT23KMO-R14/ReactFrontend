@@ -25,6 +25,7 @@ export default function UserProvider({children}) {
         setUser({...data,"token":token})
         setUser({...data,"id":id})
         sessionStorage.setItem("user", user)
+        sessionStorage.setItem("id", id)
         navigate("/userview")
       })
       .catch(error => {

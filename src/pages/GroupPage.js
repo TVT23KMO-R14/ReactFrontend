@@ -1,25 +1,8 @@
-import React , { useState, useEffect } from 'react'
+import React from 'react'
 import './GroupPage.css'
-import axios from 'axios'
+import GroupMemberList from '../components/GroupMemberList'
 
 export default function GroupPage() {
-
-    const [members, setMembers] = useState([])
-
-    useEffect(() => {
-        const fetchMembers = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/groupMembers');
-                setMembers(response.data);
-            } catch (error) {
-                console.error('Error fetching members:', error);
-            }
-        };
-
-        fetchMembers();
-    }, []);
-
-    console.log(members)
 
     return (
         <div className="group-page-container">
@@ -52,13 +35,7 @@ export default function GroupPage() {
                     <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
-                    <ul>
-                     {
-                        members.map(member => (
-                            <li id='member-list' key={member.userId}>{member.username}</li>
-                        ))
-                     }
-                    </ul>
+                    <GroupMemberList />
                 </div>
             </div>
         </div>

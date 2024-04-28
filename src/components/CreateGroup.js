@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import './CreateGroup.css'
 
@@ -6,6 +7,7 @@ export default function CreateGroup() {
     const [groupName, setGroupName] = useState('')
     const [groupDescription, setGroupDescription] = useState('')
     const [groupLogo, setGroupLogo] = useState('')
+    const navigate = useNavigate();
     const groupLogos = ['./img/baseball.jpg',
         './img/moon.png',
         './img/rocket.png',
@@ -23,7 +25,8 @@ export default function CreateGroup() {
         try {
             const response = await axios.post('http://localhost:3000/group/add', { groupName: groupName, groupDescription: groupDescription, groupLogo: groupLogo });
             console.log(response.data);
-            
+            navigate('/groupList', { state: { fromCreateGroup: true } });
+
         } catch (error) {
             console.error('Error adding group', error);
             console.log(groupName)
@@ -61,7 +64,6 @@ export default function CreateGroup() {
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-
             </div>
         </div>
     )

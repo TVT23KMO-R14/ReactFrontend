@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+# Web-ohjelmoinnin sovellusprojekti - Movie Mayhem
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Sisällysluettelo
+- [Web-ohjelmoinnin sovellusprojekti - Movie Mayhem](#web-ohjelmoinnin-sovellusprojekti---movie-mayhem)
+  - [Sisällysluettelo](#sisällysluettelo)
+  - [Sivuston esittely](#sivuston-esittely)
+  - [Työskentely ja työnjako](#työskentely-ja-työnjako)
+  - [Käyttöliittymän suunnittelu ja toteutus](#käyttöliittymän-suunnittelu-ja-toteutus)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+      - [Node.js ja Express](#nodejs-ja-express)
+      - [Rajapinta](#rajapinta)
+      - [Dokumentaatio](#dokumentaatio)
+    - [Testaus](#testaus)
+    - [Tietokanta](#tietokanta)
+      - [ER-kaavio](#er-kaavio)
+    - [Sovelluksen käyttöönotto](#sovelluksen-käyttöönotto)
 
-## Available Scripts
+## Sivuston esittely
+Movie Mayhem on elokuvien sekä tv-sarjojen yhden pysähdyksen löytöasema sekä arvostelusivuston prototyyppi. Sivusto on toteutettu ryhmätyönä Oulun ammattikorkeakoulun Web-ohjelmoinnin sovellusprojektikurssilla. Sivuston on toteuttanut Tiina Mäntykivi, Jarno Tauriainen, Johannes Vidkopp sekä Joona Vilponen.
 
-In the project directory, you can run:
+![](/readmeKuvat/1LogoKuva.png)
+**Kuva 1.** Websovelluksen logo.
 
-### `npm start`
+Projektin tarkoituksena oli toteuttaa reaktiivinen ja käyttäjäystävällinen web-sovellus hyödyntäen React kirjastoa frontendin ja node.js backendin kanssa ja oppia fullstack ohjelmistokehitystä sekä Kanban ja Scrum toimintatapoja hyödyntäen GitHubiin luotua kanbantaulua (kuva 2).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Sivustolla pystyy selaamaan ja etsimään elokuvia sekä tv-sarjoja ja katsomaan näistä top-listoja. Sivustolle voi myös rekisteröityä käyttäjäksi, jolloin käyttäjälle avautuu mahdollisuus kirjoittaa arvioita, luoda ja liittyä ryhmiin sekä laatia omia suosikkilistoja, joita voi myös jakaa linkillä muille nähtäväksi.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![](/readmeKuvat/2KanbanKuva.png)
+**Kuva 2.** Kanbantaulu GitHubissa.
 
-### `npm test`
+## Työskentely ja työnjako
+Projekti lähti käyntiin suunnittelemalla ensin hieman ulkoasua, tietokantaa sekä haluamiamme ominaisuuksia. Saatuamme prototyypin etusivusta sekä käsityksen tarvittavista komponenteista pystyimme aloittamaan myös backendin suunnittelun. Tässä projektissa kaikki ryhmän jäsenet pääsivät tutustumaan fullstack-kehitykseen tekemällä ainakin jonkin osuuden alusta loppuun asti. Jokainen jäsen toteutti frontendiin sivun ja kyseiseen sivuun liittyvät endpointit backendiin sekä tarvittavat kyselyt backendistä tietokantaan.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Tehtävät napattiin kanbantaulun backlogista omaan tahtiin, taikka jaettiin scrumpalaverissa. Ryhmä- sekä scrumpalavereja olemme pitäneet viikoittain tai useamman kerran viikossa. Muutoin työskentely on ollut ryhmänjäsenillä pääosin itsenäistä.
 
-### `npm run build`
+## Käyttöliittymän suunnittelu ja toteutus
+Sovelluksen rautalankamallia hahmoteltiin sekä paperille piirtämällä, että Figma ja Wireframe.cc -sovelluksilla (kuva 3). Sivuston käyttöliittymä jaettiin jo suunnitteluvaiheessa sopiviin osiin, joiden toteuttaminen komponentteina olisi mahdollisimman virtaviivaista. Alasivuilla osa komponenteista piilotetaan ja uusia komponentteja voidaan lisätä ilman, että sivuston yleisilme muuttuu radikaalisti eri toimintojen välillä.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![](/readmeKuvat/3RautalankaKuva.png)
+**Kuva 3.** Etusivun rautalankamalli ja sisäänkirjautumisen hahmottelua.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Erikokoiset näytöt ja laitteet on sivustolla huomioitu muuttamalla fonttien kokoa, komponenttien sijaintia ja ulkomuotoa laitteen ominaisuuksien mukaan. Lisäksi eri elementit reagoivat hiiren kursoriin antaen käyttäjälle interaktiivista palautetta. Sivuston eri osat ja komponentit on nimetty selkeästi käyttötarkoituksen mukaan. Esimerkiksi HTML:n semanttisia elementtejä on käytetty hyväksi ja sivunavigointipalkin komponenteille on annettu kuvaavat otsikot.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![](/readmeKuvat/4SemanttisiaKuva.gif)
+**Kuva 4.** Semanttisia elementtejä.
 
-### `npm run eject`
+### Frontend
+Käyttöliittymä on tehty eri kuvasuhteille mukautuvaksi eli reaktiiviseksi ja käyttäjäystävälliseksi avoimen lähdekoodin kirjastoa React.js hyödyntäen. React mahdollistaa erityisesti Movie Mayhemissä hyödynnettyä niin sanottua yhden sivun applikaatiota, jossa React lataa vain sivulla muuttuvat osiot tai komponentit koko sivun sijaan. Sivuston ulkoasussa on hyödynnetty myös Bootstrapin Reactille käännettyä React-Bootstrap kirjastoa, joka on kolmannen osapuolen ulkoasuun keskittyvä React komponentti, joka ei vaadi muita riippuvuuksia. Sivuston ulkoinen ilme ja asettelu on muutoin tehty CSS-tyylikieltä käyttäen, joka on standardi HTML- sekä React-pohjaisten web-sivujen muotoilukieli. Käyttöliittymä on jaettu komponentteihin, joita voidaan sivulla näyttää tai olla näyttämättä sen mukaan, mikä on kehittäjän, taikka sen hetkisen sivun tarve. Komponentit mahdollistavat yhden sivun applikaation, jossa Movie Mayhemin tapauksessa vain navigointi- ja alaviitepalkkien välissä oleva sisältö muuttuu sivuston eri sivuille navigoidessa.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![](/readmeKuvat/5KomponentitKuva.png)
+**Kuva 5.** Havainnekuva komponenttien piilottamisesta ja näyttämisestä.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Backend
+#### Node.js ja Express
+Sovelluksen backend on toteutettu Node.js:llä joka mahdollistaa Frontendin ohella myös backendin toteuttamisen Javascript ohjelmointikielellä, virtaviivaistaen websovelluskehitystä. Node.js on avoimen lähdekoodin suoritusympäristö, joka omaa maailman suurimman ohjelmistokirjastojen ekosysteemin npm (node package manager). Hyödynnämme websovelluksessamme Express-kirjastoa tietokannan ja frontendin välisessä kommunikoinnissa. Sillä hoidimme tietokantakyselyt kuten käyttäjien luonnit ja todentamiset, sekä API-kyselyt The Movie Databaseen.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Rajapinta
+Sovelluksen tietokannan ja palvelimen välillä JSON datan vastaanottamiseen käytettiin REST rajapintaa. REST-Rajapinta tarjoaa erilaisten päätepisteiden toiminnallisuuksien hallinnan halutulla endpointilla. Esimerkiksi käyttäjän arvostelujen lisäämiseen on mahdollista /review/add endpointilla. Sille annetaan parametreinä käyttäjän id, elokuvan id TMBD:stä, arvostelun arvosanana ja käyttäjän kirjoittama arvostelu elokuvasta. Palautteena käyttäjä saa HTML-statuskoodin operaation onnistumisesta tai virheilmoituksen sen epäonnistumisesta.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Dokumentaatio
+Rajapinnan dokumentaation toteutimme Postman-työkalua hyväksikäyttäen. Sitä varten kaikkien endpointtien tuli palauttaa response koodi ja antaa vastaus JSON-formaatissa. Dokumentaatio sisältää kuvaukset kunkin endpointin toiminnasta, mukaan lukien pyyntöön tarvittavat parametrit ja vastausrakenteet.
 
-## Learn More
+![](/readmeKuvat/6PostmanKuva.png)
+**Kuva 6.** Postman-dokumentaatio ryhmän jäsenten listaamisesta.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Testaus
+Projektin testauksessa käytettiin Chai- ja Mocha kirjastoja yksikkötestien tekemiseen. Yksikkötesteillä varmistimme, että sivuston osat toimivat luotettavasti itsenään. Esimerkiksi hakurajapintaa testatessa (Koodi 1) lähetetään pitkä kyselyteksti TMDB elokuvien ja tv-sarjojen hakuun, joka pitää suoriutua onnistuneesti testistä. Näin haku toiminto suoriutuu myös pidemmistä hauista ilman epäonnistumisia. Käyttäjähallinnan testauksessa käydään testi testiltä läpi käyttäjän luonti, sisäänkirjautuminen sekä käyttäjän poisto tarkistaen samalla yleisimpiä mahdollisia virhetilanteita, kuten väärän salasanan syöttäminen tai käyttäjän poistaminen ilman kirjautumista.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```javascript
+describe('Search', function() {
+  this.timeout(5000);
 
-### Code Splitting
+  it('should handle very long string queries', async function() {
+      const longString = 'a'.repeat(30);
+      const res = await chai.request(app)
+          .get('/search/headersearch')
+          .query({
+              query: longString,
+              api_key: process.env.TMDB_API_KEY,
+              page: 1
+          });
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+  });
+```
+### Tietokanta
+Hyödynnämme sovelluksessa PostgreSQL-tietokantaa tarvittavan tiedon säilyttämiseen. Tietokantaan tallennetaan muun muassa yksilölliset profiilit, luodut ryhmät, arvostelut ja käyttäjäkohtaiset suosikki elokuvat sekä sarjat. Tietokanta on luotu yhden ryhmän jäsenen Proxmox-serverillä sijaitsevaan Linux konttiin (LXC). Kehitysvaiheessa jokainen ryhmän jäsen otti SSH-yhteyden serverille ja tietokantayhteys ohjattiin porttiohjauksen avulla tietokannalle. 
 
-### Analyzing the Bundle Size
+#### ER-kaavio
+Alla oleva ER-kaavio kuvaa tietokannan rakennetta. Tietokanta koostuu keskeisistä tauluista, kuten users, group ja review, jotka tallentavat käyttäjätiedot, ryhmien tiedot ja käyttäjäarvostelut. Taulut groupMember ja groupInvite mahdollistavat käyttäjien ja kutsujen hallinnan ryhmiin. Poistettaessa käyttäjän poistuvat myös käyttäjään linkitetyt tiedot automaattisesti tietokannasta.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![](/readmeKuvat/7ER-kaavioKuva.png)
+**Kuva 7.** Sovelluksen tietokannan ER-kaavio.
 
-### Making a Progressive Web App
+### Sovelluksen käyttöönotto
+Sovelluksen saa käyttöön kloonaamalla ReactFrontend sekä NodeBackend repositoriot. Siirry ReactFrontend repositorioon ja kopioi repositorion osoite. Luo repositioriosta kopio koneellesi käskyllä:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+git clone https://github.com/TVT23KMO-R14/ReactFrontend.git
 
-### Advanced Configuration
+Toista sama myös NodeBackend repositoriolle. Asenna tarvittavat riippuvuudet molempien ReactFrontend sekä NodeBackend kansioiden juureen:	
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+npm install
 
-### Deployment
+Käynnistä ReactFrontend käskyllä:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+npm start
 
-### `npm run build` fails to minify
+Toista sama NodeBackendille.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+NodeBackend kansion juureen on liitetty SQL-tiedosto (createdatabase.sql), mikä sisältää tietokannan SQL-koodin, jotta saat luotua itsellesi käyttöön sovellukseen tarvittavan tietokannan.
+
+Oletkin sitten valmis käynnistämään sovelluksen! käynnistä frontend sekä backend ja pääsetkin jo kokeilemaan sovelluksen ominaisuuksia.
+

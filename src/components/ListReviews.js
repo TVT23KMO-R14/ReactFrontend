@@ -11,7 +11,7 @@ export default function ListReviews({ reviews }) {
             <Card.Header>Reviews</Card.Header>
             <ListGroup variant="flush">
                 {reviews.map((review) => (
-                    <ListGroup.Item key={review.id}>
+                    <ListGroup.Item key={review.idReview}>
                         <Card.Text>{review.review}</Card.Text>
                     </ListGroup.Item>
                 ))}

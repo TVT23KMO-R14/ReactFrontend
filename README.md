@@ -97,7 +97,7 @@ Alla oleva ER-kaavio kuvaa tietokannan rakennetta. Tietokanta koostuu keskeisist
 ### Sovelluksen käyttöönotto
 Sovelluksen saa käyttöön kloonaamalla ReactFrontend sekä NodeBackend repositoriot. Siirry ReactFrontend repositorioon ja kopioi repositorion osoite. Luo repositioriosta kopio koneellesi käskyllä:
 
-git clone <n/>http://github.com/TVT23KMO-R14/ReactFrontend.git
+git clone ```http://github.com/TVT23KMO-R14/ReactFrontend.git```
 
 Toista sama myös NodeBackend repositoriolle. Asenna tarvittavat riippuvuudet molempien ReactFrontend sekä NodeBackend kansioiden juureen:	
 

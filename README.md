@@ -19,14 +19,14 @@
 ## Sivuston esittely
 Movie Mayhem on elokuvien sekä tv-sarjojen yhden pysähdyksen löytöasema sekä arvostelusivuston prototyyppi. Sivusto on toteutettu ryhmätyönä Oulun ammattikorkeakoulun Web-ohjelmoinnin sovellusprojektikurssilla. Sivuston on toteuttanut Tiina Mäntykivi, Jarno Tauriainen, Johannes Vidkopp sekä Joona Vilponen.
 
-![](/readmeKuvat/1LogoKuva.png)(<br>)
+![](/readmeKuvat/1LogoKuva.png)<br>
 **Kuva 1.** Websovelluksen logo.
 
 Projektin tarkoituksena oli toteuttaa reaktiivinen ja käyttäjäystävällinen web-sovellus hyödyntäen React kirjastoa frontendin ja node.js backendin kanssa ja oppia fullstack ohjelmistokehitystä sekä Kanban ja Scrum toimintatapoja hyödyntäen GitHubiin luotua kanbantaulua (kuva 2).
 
 Sivustolla pystyy selaamaan ja etsimään elokuvia sekä tv-sarjoja ja katsomaan näistä top-listoja. Sivustolle voi myös rekisteröityä käyttäjäksi, jolloin käyttäjälle avautuu mahdollisuus kirjoittaa arvioita, luoda ja liittyä ryhmiin sekä laatia omia suosikkilistoja, joita voi myös jakaa linkillä muille nähtäväksi.
 
-![](/readmeKuvat/2KanbanKuva.png)(<br>)
+![](/readmeKuvat/2KanbanKuva.png)<br>
 **Kuva 2.** Kanbantaulu GitHubissa.
 
 ## Työskentely ja työnjako
@@ -37,18 +37,18 @@ Tehtävät napattiin kanbantaulun backlogista omaan tahtiin, taikka jaettiin scr
 ## Käyttöliittymän suunnittelu ja toteutus
 Sovelluksen rautalankamallia hahmoteltiin sekä paperille piirtämällä, että Figma ja Wireframe.cc -sovelluksilla (kuva 3). Sivuston käyttöliittymä jaettiin jo suunnitteluvaiheessa sopiviin osiin, joiden toteuttaminen komponentteina olisi mahdollisimman virtaviivaista. Alasivuilla osa komponenteista piilotetaan ja uusia komponentteja voidaan lisätä ilman, että sivuston yleisilme muuttuu radikaalisti eri toimintojen välillä.
 
-![](/readmeKuvat/3RautalankaKuva.png)(<br>)
+![](/readmeKuvat/3RautalankaKuva.png)<br>
 **Kuva 3.** Etusivun rautalankamalli ja sisäänkirjautumisen hahmottelua.
 
 Erikokoiset näytöt ja laitteet on sivustolla huomioitu muuttamalla fonttien kokoa, komponenttien sijaintia ja ulkomuotoa laitteen ominaisuuksien mukaan. Lisäksi eri elementit reagoivat hiiren kursoriin antaen käyttäjälle interaktiivista palautetta. Sivuston eri osat ja komponentit on nimetty selkeästi käyttötarkoituksen mukaan. Esimerkiksi HTML:n semanttisia elementtejä on käytetty hyväksi ja sivunavigointipalkin komponenteille on annettu kuvaavat otsikot.
 
-![](/readmeKuvat/4SemanttisiaKuva.gif)(<br>)
+![](/readmeKuvat/4SemanttisiaKuva.gif)<br>
 **Kuva 4.** Semanttisia elementtejä.
 
 ### Frontend
 Käyttöliittymä on tehty eri kuvasuhteille mukautuvaksi eli reaktiiviseksi ja käyttäjäystävälliseksi avoimen lähdekoodin kirjastoa React.js hyödyntäen. React mahdollistaa erityisesti Movie Mayhemissä hyödynnettyä niin sanottua yhden sivun applikaatiota, jossa React lataa vain sivulla muuttuvat osiot tai komponentit koko sivun sijaan. Sivuston ulkoasussa on hyödynnetty myös Bootstrapin Reactille käännettyä React-Bootstrap kirjastoa, joka on kolmannen osapuolen ulkoasuun keskittyvä React komponentti, joka ei vaadi muita riippuvuuksia. Sivuston ulkoinen ilme ja asettelu on muutoin tehty CSS-tyylikieltä käyttäen, joka on standardi HTML- sekä React-pohjaisten web-sivujen muotoilukieli. Käyttöliittymä on jaettu komponentteihin, joita voidaan sivulla näyttää tai olla näyttämättä sen mukaan, mikä on kehittäjän, taikka sen hetkisen sivun tarve. Komponentit mahdollistavat yhden sivun applikaation, jossa Movie Mayhemin tapauksessa vain navigointi- ja alaviitepalkkien välissä oleva sisältö muuttuu sivuston eri sivuille navigoidessa.
 
-![](/readmeKuvat/5KomponentitKuva.png)(<br>)
+![](/readmeKuvat/5KomponentitKuva.png)<br>
 **Kuva 5.** Havainnekuva komponenttien piilottamisesta ja näyttämisestä.
 
 ### Backend
@@ -61,7 +61,7 @@ Sovelluksen tietokannan ja palvelimen välillä JSON datan vastaanottamiseen kä
 #### Dokumentaatio
 Rajapinnan dokumentaation toteutimme Postman-työkalua hyväksikäyttäen. Sitä varten kaikkien endpointtien tuli palauttaa response koodi ja antaa vastaus JSON-formaatissa. Dokumentaatio sisältää kuvaukset kunkin endpointin toiminnasta, mukaan lukien pyyntöön tarvittavat parametrit ja vastausrakenteet.
 
-![](/readmeKuvat/6PostmanKuva.png)(<br>)
+![](/readmeKuvat/6PostmanKuva.png)<br>
 **Kuva 6.** Postman-dokumentaatio ryhmän jäsenten listaamisesta.
 
 ### Testaus
@@ -91,7 +91,7 @@ Hyödynnämme sovelluksessa PostgreSQL-tietokantaa tarvittavan tiedon säilyttä
 #### ER-kaavio
 Alla oleva ER-kaavio kuvaa tietokannan rakennetta. Tietokanta koostuu keskeisistä tauluista, kuten users, group ja review, jotka tallentavat käyttäjätiedot, ryhmien tiedot ja käyttäjäarvostelut. Taulut groupMember ja groupInvite mahdollistavat käyttäjien ja kutsujen hallinnan ryhmiin. Poistettaessa käyttäjän poistuvat myös käyttäjään linkitetyt tiedot automaattisesti tietokannasta.
 
-![](/readmeKuvat/7ER-kaavioKuva.png)(<br>)
+![](/readmeKuvat/7ER-kaavioKuva.png)<br>
 **Kuva 7.** Sovelluksen tietokannan ER-kaavio.
 
 ### Sovelluksen käyttöönotto

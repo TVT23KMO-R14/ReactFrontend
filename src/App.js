@@ -14,7 +14,7 @@ import NewsDetails from './components/NewsFinnkino';
 import Login from './components/Login';
 import CreateGroup from './components/CreateGroup'
 import GroupPage from './pages/GroupPage';
-import UserView from './components/UserView';
+
 import UserProvider from './context/UserProvider';
 import ReviewMovie from './components/ReviewMovie';
 import MoviePage from './pages/MoviePage'

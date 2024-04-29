@@ -19,7 +19,7 @@ export default function SearchComponent({ onMovieSelect, setShowAdvancedSearch }
 
     // Suoritaa haun ja päivitä elokuvamuuttuja vastauksen mukaan. Debounce viive tapahtuu joka 300 ms
     const debouncedSearch = useCallback(
-        debounce(async (searchTerm) => {
+        debounce(async (searchTerm, shouldShowDropdown = true) => {
             if (!searchTerm) return;
             setLoading(true);
             setError('');
@@ -28,6 +28,9 @@ export default function SearchComponent({ onMovieSelect, setShowAdvancedSearch }
                     params: { query: searchTerm }
                 });
                 setMovies([...response.data.movies, ...response.data.tvShows]);
+                if (shouldShowDropdown) {
+                    setIsDropdownVisible(true);
+                  }
             } catch (err) {
                 setError(err.message || 'An error occurred');
             } finally {
@@ -42,7 +45,7 @@ export default function SearchComponent({ onMovieSelect, setShowAdvancedSearch }
         e.preventDefault();
         setSearchButtonPressed(true);
         setIsDropdownVisible(false);
-        debouncedSearch(search);
+        debouncedSearch(search,false);
     };
 
     // Kun debounceSearch on tehty movies state päivitetään viimeisellä haulla 
@@ -51,7 +54,6 @@ export default function SearchComponent({ onMovieSelect, setShowAdvancedSearch }
             navigate('/search', { state: { results: movies } });
             setShowAdvancedSearch(true);
             setSearchButtonPressed(false);
-            setIsDropdownVisible(false);
         }
     }, [movies, navigate, searchButtonPressed, setShowAdvancedSearch]);
 
@@ -76,7 +78,6 @@ export default function SearchComponent({ onMovieSelect, setShowAdvancedSearch }
         onMovieSelect(movie);
         setMovies([]);
         setSearch('');
-        setIsDropdownVisible(false);
     };
 
 
@@ -87,20 +88,7 @@ export default function SearchComponent({ onMovieSelect, setShowAdvancedSearch }
         return () => debouncedSearch.cancel();
     }, [search, debouncedSearch]);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (isDropdownVisible && dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setIsDropdownVisible(false); 
-            }
-        };
-    
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isDropdownVisible]); 
 
-    
     return (
         <div className='search-container'>
             <form onSubmit={handleSearchSubmit}>
@@ -114,7 +102,7 @@ export default function SearchComponent({ onMovieSelect, setShowAdvancedSearch }
             </form>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
-            <div className="search-results"  ref={dropdownRef} style={{ display: movies.length > 0 ? 'block' : 'none' }}>
+            <div className="search-results"  ref={dropdownRef} style={{ display: isDropdownVisible ? 'block' : 'none' }}>
                 <ul className="list-group">
                     {movies.map((movie, index) => (
                         <li key={index}

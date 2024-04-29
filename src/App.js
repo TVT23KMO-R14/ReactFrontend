@@ -23,6 +23,7 @@ import SeriesPage from './pages/SeriesPage';
 import UserViewPage from './pages/UserViewPage';
 import Logout from './components/Logout';
 import AdvancedSearchbar from './components/AdvancedSearchbar';
+import GroupListPage from './components/GroupListPage';
 
 function App() {
 
@@ -46,6 +47,9 @@ function App() {
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
   const [fromYear, setFromYear] = useState('');
   const [toYear, setToYear] = useState('');
+  const [selectedGenreId, setSelectedGenreId] = useState(null);
+  
+
 
   useEffect(() => {
     if (location.pathname !== '/search') {
@@ -60,7 +64,8 @@ function App() {
           <Header setMovies={setMovies} onMovieSelect={handleMovieSelect}
           setShowAdvancedSearch={setShowAdvancedSearch}  />
           {showAdvancedSearch && <AdvancedSearchbar  setFromYear={setFromYear}
-            toYear={toYear} setToYear={setToYear} />}
+            toYear={toYear} setToYear={setToYear} 
+            selectedGenreId={selectedGenreId}  setSelectedGenreId={setSelectedGenreId} />}
           <div className='main'>
             {showSidebar && <Sidebar />}
             <div className='content'>
@@ -78,12 +83,14 @@ function App() {
                 </>} />
                 <Route path='/moviepage/:id' element={<MoviePage />} />
                 <Route path='/seriespage/:id' element={<SeriesPage />} />
-                <Route path='/search' element={<SearchResultsPage fromYear={fromYear} toYear={toYear}/>} />
+                <Route path='/search' element={<SearchResultsPage fromYear={fromYear} toYear={toYear}
+                  selectedGenreId={selectedGenreId}  setSelectedGenreId={setSelectedGenreId}  />} />
                 <Route path='/showtimes' element={<ShowtimeDetails />} />
                 <Route path='/showtimes/news' element={<NewsDetails />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/userview' element={<UserViewPage />} />
                 <Route path='/logout' element={<Logout />} />
+                <Route path='/groupList' element={<GroupListPage />} />
               </Routes>
             </div>
           </div>

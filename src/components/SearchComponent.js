@@ -1,34 +1,36 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 import { useNavigate } from 'react-router-dom';
 import './AdvancedSearchbar';
 
-export default function SearchComponent({ onMovieSelect,setShowAdvancedSearch }) {
+export default function SearchComponent({ onMovieSelect, setShowAdvancedSearch }) {
     const [search, setSearch] = useState('');
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const [searchButtonPressed, setSearchButtonPressed] = useState(false);
-    
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-    
-
+    const dropdownRef = useRef(null);
 
 
     // Suoritaa haun ja päivitä elokuvamuuttuja vastauksen mukaan. Debounce viive tapahtuu joka 300 ms
     const debouncedSearch = useCallback(
-        debounce(async (searchTerm) => {
+        debounce(async (searchTerm, shouldShowDropdown = true) => {
             if (!searchTerm) return;
             setLoading(true);
             setError('');
             try {
                 const response = await axios.get(process.env.REACT_APP_SERVER_URL + 'search/headersearch', {
-                    params: { query: searchTerm}
+                    params: { query: searchTerm }
                 });
                 setMovies([...response.data.movies, ...response.data.tvShows]);
+                if (shouldShowDropdown) {
+                    setIsDropdownVisible(true);
+                  }
             } catch (err) {
                 setError(err.message || 'An error occurred');
             } finally {
@@ -39,25 +41,22 @@ export default function SearchComponent({ onMovieSelect,setShowAdvancedSearch })
     );
 
 
+    const handleSearchSubmit = async (e) => {
+        e.preventDefault();
+        setSearchButtonPressed(true);
+        setIsDropdownVisible(false);
+        debouncedSearch(search,false);
+    };
 
+    // Kun debounceSearch on tehty movies state päivitetään viimeisellä haulla 
+    useEffect(() => {
+        if (movies.length > 0 && searchButtonPressed) {
+            navigate('/search', { state: { results: movies } });
+            setShowAdvancedSearch(true);
+            setSearchButtonPressed(false);
+        }
+    }, [movies, navigate, searchButtonPressed, setShowAdvancedSearch]);
 
-
-const handleSearchSubmit = async (e) => {
-    e.preventDefault();
-    setSearchButtonPressed(true); // Set the state to indicate the button has been pressed
-    debouncedSearch(search); // This will perform the search and set the movies state.
-};
-
-// After debouncedSearch is called, the movies state will be updated with the latest search results.
-useEffect(() => {
-    if (movies.length > 0 && searchButtonPressed) {
-        navigate('/search', { state: { results: movies } });
-        //navigate(`/search?fromYear=${inputFromYear}`, { state: { results: searchResults } });
-        setShowAdvancedSearch(true);
-        setSearchButtonPressed(false); // Reset the state after navigation
-    }
-}, [movies, navigate, searchButtonPressed,  setShowAdvancedSearch]);
-    
     useEffect(() => {
         if (search === '') {
             setMovies([]);
@@ -82,20 +81,17 @@ useEffect(() => {
     };
 
 
-
-
-    // try too
     useEffect(() => {
         if (search) {
             debouncedSearch(search);
         }
         return () => debouncedSearch.cancel();
     }, [search, debouncedSearch]);
-    //end
+
 
     return (
         <div className='search-container'>
-             <form onSubmit={handleSearchSubmit}>
+            <form onSubmit={handleSearchSubmit}>
                 <input
                     type='text'
                     placeholder='Search'
@@ -106,7 +102,7 @@ useEffect(() => {
             </form>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
-            <div className="search-results" style={{ display: movies.length > 0 ? 'block' : 'none' }}>
+            <div className="search-results"  ref={dropdownRef} style={{ display: isDropdownVisible ? 'block' : 'none' }}>
                 <ul className="list-group">
                     {movies.map((movie, index) => (
                         <li key={index}

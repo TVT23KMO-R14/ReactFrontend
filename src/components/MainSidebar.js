@@ -60,16 +60,6 @@ export default function MainSidebar() {
         <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/top_rated' } }); }}>
           Top 100
         </a>
-        <a href="#">Dolor!</a>
-        <a href="#">Architecto?</a>
-        <a href="#">Sapiente.</a>
-        <a href="#">Odit.</a>
-        <a href="#">Recusandae!</a>
-        <a href="#">Repellat!</a>
-        <a href="#">Architecto?</a>
-        <a href="#">Soluta.</a>
-        <a href="#">Assumenda!</a>
-
       </div>
       <div className='sidebarcontent showtimes'>
         <Link to={'/showtimes'}>

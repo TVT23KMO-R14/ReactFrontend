@@ -21,11 +21,19 @@ export default function LoginStatus() {
                     <span>Login</span><span className='material-symbols-outlined'>person</span>
                 </div>
             </Link>}
-            {user && <Link to='/logout'>
+            {user && <>
+            <Link to='/userview'>
+                <div className='loginstatus'>
+                    <span>{user.username}</span><span className='material-symbols-outlined'>account_circle</span>
+                </div>
+            </Link>
+            <Link to='/logout'>
                 <div className='loginstatus'>
                     <span>Logout</span><span className='material-symbols-outlined'>logout</span>
                 </div>
-            </Link>}
+            </Link>
+            </>
+            }
         </div>
     )
 

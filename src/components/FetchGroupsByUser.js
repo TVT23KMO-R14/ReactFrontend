@@ -19,6 +19,7 @@ export default function FetchGroupsByUser() {
         })
             .then((response) => {
                 setGroups(response.data)
+                console.log(response.data)
             })
             .catch((err) => {
                 setError(err.message || 'An error occurred but no error message was received.')

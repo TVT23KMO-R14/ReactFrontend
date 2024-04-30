@@ -52,13 +52,30 @@ export default function MainSidebar() {
         <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/top_rated' } }); }}>
           Top 100
         </a>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/popular' } }); }}>
+          Popular
+        </a>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/now_playing' } }); }}>
+          Now Playing
+        </a>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/upcoming' } }); }}>
+          Upcoming
+        </a>
         <Link to='/creategroup'><button>Create Group</button></Link>
-        <Link to='/grouppage'><button>Group Page</button></Link>
       </div>
       <div className='sidebarcontent tvseriesfiltered'>
         <h2>TV Series</h2>
         <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/top_rated' } }); }}>
           Top 100
+        </a>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/popular' } }); }}>
+          Popular
+        </a>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/on_the_air' } }); }}>
+          On The Air
+        </a>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/airing_today' } }); }}>
+          Airing Today
         </a>
       </div>
       <div className='sidebarcontent showtimes'>

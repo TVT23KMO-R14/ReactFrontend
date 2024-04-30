@@ -4,7 +4,7 @@ import { useUser } from '../context/useUser'
 import UserView from '../components/UserView'
 import FetchReviews from '../components/FetchReviewsByUser'
 import FetchGroupsByUser from '../components/FetchGroupsByUser'
-import SortTest from '../components/SortTest'
+import FetchUserInformation from '../components/FetchUserInformation'
 
 
 export default function UserViewPage() {
@@ -16,6 +16,7 @@ export default function UserViewPage() {
         <div>
             <div>Tervetuloa, {user.username}</div>
             <UserView />
+            <FetchUserInformation />
             <FetchGroupsByUser />
             <FetchReviews />
         </div>

@@ -22,10 +22,13 @@ export default function UserProvider({children}) {
         console.log('id: ',response.data.id)
         const token = response.data.jwtToken
         const id = response.data.id
-        setUser({...data,"token":token})
-        setUser({...data,"id":id})
+        const updateUserData = {...data, token:token, id:id}
+        setUser(updateUserData)
+        console.log('UserProvider token: ',token)
+        console.log('UserProvider data.token: ',data.token)
         sessionStorage.setItem("user", user)
         sessionStorage.setItem("id", id)
+        sessionStorage.setItem("token", token)
         navigate("/userview")
       })
       .catch(error => {

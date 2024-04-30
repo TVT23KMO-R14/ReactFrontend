@@ -151,13 +151,3 @@ export default function AdvancedSearchbar({ fromYear, setFromYear, toYear, setTo
             </div>
             )
 }
-
-/*<select
-                            value={sortOrder}
-                            onChange={(e) => setSortOrder(e.target.value)}
-                            className='form-control'
-                            >
-                                <option value={'Default'}>No sorting selected</option>
-                                <option value={'ascending'}>Asc</option>
-                                <option value={'descending'}>Des</option>
-                        </select>*/

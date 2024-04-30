@@ -10,7 +10,7 @@ export default function ListGroups({ groups }) {
 
     return (
         <Card>
-            <Card.Header>Your Groups</Card.Header>
+            <Card.Header>Your Groups{console.log("ryhmät:", groups)}</Card.Header>
         <ListGroup variant="flush">
           {groups.map((group) => (
             <ListGroup.Item key={group.idGroup}>
@@ -18,7 +18,9 @@ export default function ListGroups({ groups }) {
                 <Col md={group.groupLogo ? 9 : 12}>
                   <Row>
                     <Col>
-                      <Card.Title>{group.groupName}</Card.Title>
+                      <Card.Title>{group.groupName}
+                      {console.log(group.groupName)}
+                      </Card.Title>
                     </Col>
                   </Row>
                   <Row>

@@ -15,13 +15,12 @@ export default function ListGroups({ groups }) {
             <Card.Header>Your Groups{console.log("ryhmät:", groups)}</Card.Header>
         <ListGroup variant="flush">
           {groups.map((group) => (
-            <ListGroup.Item key={group.idGroup} onClick={() => navigate('/grouppage', { state: { idGroup: group.idGroup } })}>
+            <ListGroup.Item className="listgroups" key={group.idGroup} onClick={() => navigate('/grouppage', { state: { idGroup: group.idGroup } })}>
               <Row>
                 <Col md={group.groupLogo ? 9 : 12}>
                   <Row>
                     <Col>
                       <Card.Title>{group.groupName}
-                      {console.log(group.groupName)}
                       </Card.Title>
                     </Col>
                   </Row>

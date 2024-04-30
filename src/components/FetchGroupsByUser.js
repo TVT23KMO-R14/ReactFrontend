@@ -2,23 +2,23 @@ import React from 'react'
 import axios from 'axios'
 import { useUser } from '../context/useUser'
 import { useState, useEffect } from 'react'
-import ListReviews from './ListReviews'
+import ListGroups from './ListGroups'
 
 
-export default function FetchReviewsByUser() {
+export default function FetchGroupsByUser() {
     const { user } = useUser()
-    const [reviews, setReviews] = useState([])
+    const [groups, setGroups] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
     useEffect(() => {
         setLoading(true)
         setError('')
-        axios.get(process.env.REACT_APP_SERVER_URL + 'review/byuser', {
-            params: { idUser: user.id }
+        axios.get(process.env.REACT_APP_SERVER_URL + 'groupmember/bymember', {
+            params: { userId: user.id }
         })
             .then((response) => {
-                setReviews(response.data)
+                setGroups(response.data)
             })
             .catch((err) => {
                 setError(err.message || 'An error occurred but no error message was received.')
@@ -37,6 +37,6 @@ export default function FetchReviewsByUser() {
     }
 
     return (
-        <ListReviews reviews={reviews} />
+        <ListGroups groups={groups} />
     )
 }

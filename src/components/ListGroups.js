@@ -1,9 +1,11 @@
 import React from 'react'
 import { Card, ListGroup, Row, Col } from 'react-bootstrap'
 import './ListGroups.css'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function ListGroups({ groups }) {
+  const navigate = useNavigate();
 
     //https://react-bootstrap.netlify.app/docs/components/list-group/
     //https://react-bootstrap.netlify.app/docs/components/cards/
@@ -13,7 +15,7 @@ export default function ListGroups({ groups }) {
             <Card.Header>Your Groups</Card.Header>
         <ListGroup variant="flush">
           {groups.map((group) => (
-            <ListGroup.Item key={group.idGroup}>
+            <ListGroup.Item key={group.idGroup} onClick={() => navigate('/grouppage', { state: { idGroup: group.idGroup } })}>
               <Row>
                 <Col md={group.groupLogo ? 9 : 12}>
                   <Row>

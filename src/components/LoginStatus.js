@@ -1,11 +1,19 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../context/useUser';
 import './LoginStatus.css';
 
+
 export default function LoginStatus() {
-    const { user } = useUser()
+    const { user } = useUser();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log("User state changed:", user);
+    }, [user]);
+
+
     return (
         <div className='login'>
             {!user && <Link to='/login'>
@@ -20,6 +28,6 @@ export default function LoginStatus() {
             </Link>}
         </div>
     )
-}
 
+    }
 

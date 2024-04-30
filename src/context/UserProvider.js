@@ -35,11 +35,16 @@ export default function UserProvider({children}) {
         throw error
       })
   }
-
+  const logout = () => {
+    setUser(null); // Reset the user state
+    sessionStorage.removeItem("token"); // Clear stored token
+    sessionStorage.removeItem("user"); // If you store user details in session storage, clear them
+    navigate('/login'); // Redirect to login page
+  };
 
 
   return (
-    <UserContext.Provider value={{user,setUser,login}}>
+    <UserContext.Provider value={{user,setUser,login, logout}}>
       { children } 
     </UserContext.Provider>
   )

@@ -41,7 +41,12 @@ function Login() {
       event.preventDefault()
       //if (username.length >0 && password.length >0) {
         const data = {"username":loginData.username,"password":loginData.password}
-        try {login(data)} catch (error) {console.log(error)}
+        try {
+          login(data)
+        } catch(error)
+        {
+          console.log(error)
+        }
 
       //}
       /*

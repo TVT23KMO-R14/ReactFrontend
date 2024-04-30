@@ -19,7 +19,8 @@ export default function FetchInvites() {
             params: { idUser: user.id }
         })
             .then((response) => {
-                if (response.data.length === 0) {
+                console.log(response.data.message)
+                if (response.data.message === 'No invites found') {
                     setShowInvites(false)
                 }else{
                     setShowInvites(true)

@@ -32,7 +32,8 @@ export default function UserProvider({children}) {
         navigate("/userview")
       })
       .catch(error => {
-        throw error
+        console.log(error)
+        alert('Login failed, chek your username and password.')
       })
   }
   const logout = () => {

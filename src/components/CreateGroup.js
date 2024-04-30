@@ -26,14 +26,22 @@ export default function CreateGroup() {
             const user_idUser= JSON.parse(sessionStorage.getItem('id'));
             console.log(user_idUser);
 
-            const response = await axios.post('http://localhost:3000/group/add', { groupName: groupName, groupDescription: groupDescription, groupLogo: groupLogo });
-            console.log(response.data);
-            navigate('/groupList', { state: { fromCreateGroup: true } });
+            const response = await axios.post('http://localhost:3000/group/add', { groupName: groupName, groupDescription: groupDescription, groupLogo: groupLogo })
+            .then((response) => {
+                console.log(response.data)
+                const group_idGroup = response.data.result.idGroup
+                console.log(group_idGroup)
+                axios.post('http://localhost:3000/groupmember/add', { userId: user_idUser, groupId: group_idGroup, role: 'admin'})
+                .then(() => {
+                    navigate('/grouppage', { state: { idGroup: group_idGroup } })})
+                .catch((error) => {
+                    console.error('Error adding group member as admin', error);
+                })
+            })
+            .catch((error) => {
+                console.error('Error adding group', error);
+            })
 
-            const group_idGroup = response.data.result.idGroup;
-            console.log(group_idGroup);
-
-            await axios.post('http://localhost:3000/groupmember/add', { userId: user_idUser, groupId: group_idGroup, role: 'admin'})
 
         } catch (error) {
             console.error('Error adding group', error);

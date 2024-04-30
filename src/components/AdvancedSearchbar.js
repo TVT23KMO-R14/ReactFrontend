@@ -1,17 +1,18 @@
 import './AdvancedSearchbar.css';
 import './SearchComponent';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect} from 'react';
 import axios from 'axios';
 
 
 
-export default function AdvancedSearchbar({ fromYear, setFromYear, toYear, setToYear, setSelectedGenreId  }) {
+export default function AdvancedSearchbar({ fromYear, setFromYear, toYear, setToYear, setSelectedGenreId,sortOrder, setSortOrder }) {
 
     const navigate = useNavigate();
     const [genres, setGenres] = useState([]);
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const dropdownToggleRef = useRef(null);
+    const [genreDropdownOpen, setGenreDropdownOpen] = useState(false);
+    const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
+
 
     const handleFromYear = (event) => {
         setFromYear(event.target.value);
@@ -28,7 +29,7 @@ export default function AdvancedSearchbar({ fromYear, setFromYear, toYear, setTo
         try {
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}search/genres/combined`);
             setGenres(response.data);
-           // console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.error('Error fetching genres from backend', error);
         }
@@ -38,8 +39,8 @@ export default function AdvancedSearchbar({ fromYear, setFromYear, toYear, setTo
         fetchGenres();
     }, []);
 
-    const toggleDropdown = () => {
-        setDropdownOpen(!dropdownOpen);
+    const toggleGenreDropdown = () => {
+        setGenreDropdownOpen(!genreDropdownOpen); 
     };
 
 
@@ -48,6 +49,16 @@ export default function AdvancedSearchbar({ fromYear, setFromYear, toYear, setTo
         setSelectedGenreId(genreId);
         navigate('/search');
     };
+
+    const toggleSortDropdown = () => {
+        setSortDropdownOpen(!sortDropdownOpen);
+    };
+
+    const sortChange = (sortOrder) => {
+        setSortOrder(sortOrder);
+        console.log(sortOrder)
+    }
+
 
 
     return (
@@ -77,21 +88,20 @@ export default function AdvancedSearchbar({ fromYear, setFromYear, toYear, setTo
                             <button
                                 className="btn btn-secondary dropdown-toggle"
                                 type="button"
-                                id="dropdownMenuButton"
+                                id="genreDropdownButton"
                                 aria-haspopup="true"
-                                aria-expanded={dropdownOpen}
-                                onClick={toggleDropdown}
-                                ref={dropdownToggleRef}
+                                aria-expanded={genreDropdownOpen ? 'true' : 'false'}
+                                onClick={toggleGenreDropdown}
                             >
                                 Select Genre
                             </button>
-                            <div className={`dropdown-menu${dropdownOpen ? ' show' : ''}`} aria-labelledby="dropdownMenuButton">
+                            <div className={`dropdown-menu${genreDropdownOpen ? ' show' : ''}`} aria-labelledby="genreDropdownButton">
                                 {genres.map((genre) => (
                                     <a
                                         key={genre.id}
                                         className="dropdown-item"
                                         onClick={(e) => {
-                                            e.preventDefault(); 
+                                            e.preventDefault();
                                             console.log('Dropdown item clicked!', genre.name);
                                             handleGenreSelection(genre.id);
                                         }}>
@@ -102,10 +112,52 @@ export default function AdvancedSearchbar({ fromYear, setFromYear, toYear, setTo
                         </div>
                     </div>
                     <div className="col-lg-4 col-md-6">
-                        <p>sort</p>
+                        <p>Sort</p>
+                        <div className="dropdown">
+                            <button
+                                className="btn btn-secondary dropdown-toggle"
+                                type="button"
+                                id="sortDropdownButton" 
+                                aria-haspopup="true"
+                                aria-expanded={sortDropdownOpen ? 'true' : 'false'} 
+                                onClick={toggleSortDropdown} 
+                            >
+                                {sortOrder === 'none' ? 'No sorting selected' : sortOrder === 'ascending' ? 'Asc' : 'Des'}
+                            </button>
+                            <div className={`dropdown-menu${sortDropdownOpen ? ' show' : ''}`} aria-labelledby="sortDropdownButton"> 
+                                <a
+                                    className="dropdown-item"
+                                    onClick={() => sortChange('none')}
+                                >
+                                    No sorting selected
+                                </a>
+                                <a
+                                    className="dropdown-item"
+                                    onClick={() => sortChange('ascending')}
+                                >
+                                    Asc
+                                </a>
+                                <a
+                                    className="dropdown-item"
+                                    onClick={() => sortChange('descending')}
+                                >
+                                    Des
+                                </a>
+                            </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+            )
 }
+
+/*<select
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value)}
+                            className='form-control'
+                            >
+                                <option value={'Default'}>No sorting selected</option>
+                                <option value={'ascending'}>Asc</option>
+                                <option value={'descending'}>Des</option>
+                        </select>*/

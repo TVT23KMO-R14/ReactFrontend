@@ -48,6 +48,8 @@ function App() {
   const [fromYear, setFromYear] = useState('');
   const [toYear, setToYear] = useState('');
   const [selectedGenreId, setSelectedGenreId] = useState(null);
+  const [sortOrder, setSortOrder] = useState('none');
+
   
 
 
@@ -65,7 +67,9 @@ function App() {
           setShowAdvancedSearch={setShowAdvancedSearch}  />
           {showAdvancedSearch && <AdvancedSearchbar  setFromYear={setFromYear}
             toYear={toYear} setToYear={setToYear} 
-            selectedGenreId={selectedGenreId}  setSelectedGenreId={setSelectedGenreId} />}
+            selectedGenreId={selectedGenreId}  setSelectedGenreId={setSelectedGenreId} 
+            sortOrder={sortOrder} 
+            setSortOrder={setSortOrder}/>}
           <div className='main'>
             {showSidebar && <Sidebar />}
             <div className='content'>
@@ -84,7 +88,8 @@ function App() {
                 <Route path='/moviepage/:id' element={<MoviePage />} />
                 <Route path='/seriespage/:id' element={<SeriesPage />} />
                 <Route path='/search' element={<SearchResultsPage fromYear={fromYear} toYear={toYear}
-                  selectedGenreId={selectedGenreId}  setSelectedGenreId={setSelectedGenreId}  />} />
+                  selectedGenreId={selectedGenreId}  setSelectedGenreId={setSelectedGenreId}
+                  setSortOrder={setSortOrder} sortOrder={sortOrder} />} />
                 <Route path='/showtimes' element={<ShowtimeDetails />} />
                 <Route path='/showtimes/news' element={<NewsDetails />} />
                 <Route path='/login' element={<Login />} />

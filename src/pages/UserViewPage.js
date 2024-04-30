@@ -5,6 +5,7 @@ import UserView from '../components/UserView'
 import FetchReviews from '../components/FetchReviewsByUser'
 import FetchGroupsByUser from '../components/FetchGroupsByUser'
 import FetchUserInformation from '../components/FetchUserInformation'
+import FetchInvites from '../components/FetchInvites'
 
 
 export default function UserViewPage() {
@@ -19,6 +20,7 @@ export default function UserViewPage() {
             <FetchUserInformation />
             <FetchGroupsByUser />
             <FetchReviews />
+            <FetchInvites />
         </div>
     )
 }

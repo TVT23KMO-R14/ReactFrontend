@@ -23,6 +23,8 @@ import UserViewPage from './pages/UserViewPage';
 import Logout from './components/Logout';
 import AdvancedSearchbar from './components/AdvancedSearchbar';
 import GroupListPage from './components/GroupListPage';
+import BrowseGroups from './pages/BrowseGroups';
+import BrowseReviews from './pages/BrowseReviews';
 
 
 function App() {
@@ -96,6 +98,8 @@ function App() {
                 <Route path='/userview' element={<UserViewPage />} />
                 <Route path='/logout' element={<Logout />} />
                 <Route path='/groupList' element={<GroupListPage />} />
+                <Route path='/browsegroups' element={<BrowseGroups />} />
+                <Route path='/browsereviews' element={<BrowseReviews />} />
               </Routes>
             </div>
           </div>

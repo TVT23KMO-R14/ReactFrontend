@@ -14,7 +14,7 @@ export default function FetchReviewsByUser() {
     useEffect(() => {
         setLoading(true)
         setError('')
-        axios.get(process.env.REACT_APP_SERVER_URL + 'review/byuser', {
+        axios.get(process.env.REACT_APP_SERVER_URL + 'review/all', {
             params: { idUser: user.id }
         })
             .then((response) => {

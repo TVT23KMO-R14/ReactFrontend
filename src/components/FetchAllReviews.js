@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, ListGroup } from 'react-bootstrap'; 
+import { Link } from 'react-router-dom';
 
 export default function FetchAllReviews() {
     const [reviews, setReviews] = useState([]);
@@ -37,10 +38,17 @@ export default function FetchAllReviews() {
             <ListGroup variant="flush">
                 {reviews.map((review) => (
                     <ListGroup.Item key={review.idReview}>
-                        <Card.Text>{review.review}</Card.Text>
+                        <Card.Text>Review: {review.review}</Card.Text>
+                        <Card.Text>by user: {review.userName}</Card.Text>
+                        {review.idMovie && (
+                            <Link to={`/moviepage/${review.idMovie}`}>
+                                Go to Movie
+                            </Link>
+                        )}
                     </ListGroup.Item>
                 ))}
             </ListGroup>
         </Card>
     );
 }
+// <Card.Text>for movie/show: {review.idMovie}</Card.Text>

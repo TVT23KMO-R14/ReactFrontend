@@ -15,6 +15,7 @@
   flex-direction: column;
   background-color: rgba(108,121,197,.3);
   max-width: 70rem;
+  min-width: 460px;
 }
 
 .container .header {

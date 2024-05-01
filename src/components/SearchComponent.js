@@ -4,6 +4,7 @@ import axios from 'axios';
 import debounce from 'lodash.debounce';
 import { useNavigate } from 'react-router-dom';
 import './AdvancedSearchbar';
+import './SearchComponent.css'
 
 export default function SearchComponent({ onMovieSelect, setShowAdvancedSearch }) {
     const [search, setSearch] = useState('');
@@ -98,7 +99,7 @@ export default function SearchComponent({ onMovieSelect, setShowAdvancedSearch }
                     onChange={handleChange}
                     value={search}
                 />
-                <button type="submit">Search</button>
+                <button type="submit"><span className='material-symbols-outlined'>search</span></button>
             </form>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}

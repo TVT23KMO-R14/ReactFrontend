@@ -83,7 +83,6 @@ function App() {
                 <Route path="/top100" element={<Top100 />} />
                 <Route path='/creategroup' element={<CreateGroup />} />
                 <Route path='/grouppage' element={<GroupPage />} />
-                <Route path="/allgroupspage" element={<AllGroupsPage />} />
                 <Route path="/movie/:id" element={<>
                   <MovieCard movie={selectedMovie} />
                   <ReviewMovie />

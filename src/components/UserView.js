@@ -56,7 +56,6 @@ export default function UserView() {
 */
   return (
     <div>
-      <JoinGroupButton />
       <div>UserView - Tämä on UserView.js komponentista</div>
       <Button variant="danger" onClick={handleOpen}>
         Delete user

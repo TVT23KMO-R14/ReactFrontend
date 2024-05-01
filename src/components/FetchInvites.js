@@ -16,15 +16,16 @@ export default function FetchInvites() {
         setLoading(true)
         setError('')
         axios.get(process.env.REACT_APP_SERVER_URL + 'invite/bygroupadmin', {
-            params: { idUser: user.id }
+            params: { userId: user.id }
         })
             .then((response) => {
                 console.log(response.data.message)
                 if (response.data.message === 'No invites found') {
+                    setInvites([])
                     setShowInvites(false)
                 }else{
-                    setShowInvites(true)
                     setInvites(response.data)
+                    setShowInvites(true)
                 }
             })
             .catch((err) => {

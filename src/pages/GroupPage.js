@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { useUser } from '../context/useUser'
 import axios from 'axios'
 import JoinGroupButton from '../components/JoinGroupButton'
+import LeaveGroupButton from '../components/LeaveGroupButton'
 
 export default function GroupPage() {
     const location = useLocation();
@@ -20,7 +21,6 @@ export default function GroupPage() {
                 const response = await axios.get(process.env.REACT_APP_SERVER_URL + 'group/one/', { params: { groupId: groupid } });
                 setGroup(response.data);
                 console.log(response.data);
-                
                 const membersResponse = await axios.get('http://localhost:3000/groupMember/membersbygroup', {params: {groupId: groupid}});
                 console.log(membersResponse.data);
                 
@@ -41,6 +41,7 @@ export default function GroupPage() {
         <div className="group-page-container">
             <div className='group-page-header'>
             {!isMember && <JoinGroupButton group={groupid} />}
+            {isMember &&  <LeaveGroupButton group={groupid} />}
                 <div className='members-slider'>
                     <span className="material-symbols-outlined" id='member-button' type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Group</span>
                 </div>

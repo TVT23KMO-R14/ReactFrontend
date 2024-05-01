@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useUser } from '../context/useUser'
 import { Button, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
-import JoinGroupButton from './JoinGroupButton';
 
 export default function UserView() {
   const [show, setShow] = useState(false);

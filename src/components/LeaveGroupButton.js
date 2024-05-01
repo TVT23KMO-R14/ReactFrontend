@@ -5,46 +5,50 @@ import Modal from 'react-bootstrap/Modal'
 import { useUser } from '../context/useUser'
 import axios from 'axios'
 
-export default function JoinGroupButton({ group }) {
+export default function LeaveGroupButton({ group }) {
     const { user } = useUser()
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
-    const [inviteText, setInviteText] = useState('')
-    if (!user) return null
-    const userId = user.id
-    const groupId = group
+    const [leaveText, setLeaveText] = useState('')
+    var userId = null
+    var groupId = null
 
-    const handleJoinGroup = () => {
+    if (user){
+    userId = user.id
+    groupId = group
+    }
+
+    const handleLeaveGroup = () => {
         try {
-            sendInviteRequest()
+            sendLeaveRequest()
         } catch (error) {
             console.error(error)
-            alert('Failed to send invite request')
+            alert('Failed to send leave request')
         }
     }
 
-    const sendInviteRequest = async () => {
+    const sendLeaveRequest = async () => {
         try {
-            const response = await axios.post(process.env.REACT_APP_SERVER_URL + 'invite/add', {
+            const response = await axios.post(process.env.REACT_APP_SERVER_URL + 'group/leave', {
                 userId: userId,
-                groupId: groupId,
-                inviteText: inviteText
+                groupId: groupId
             })
-            console.log("inviteText: ", inviteText)
-            alert('Invite request sent', inviteText || 'no text')
+            console.log(response)
+            alert('Leave request sent')
             handleClose()
         } catch (error) {
             console.error(error)
-            alert('Failed to send invite request')
+            alert('Failed to send leave request')
         }
     }
-
+    
+    if (!user) return null
 
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Join group
+                Leave group
             </Button>
 
             <Modal show={show} onHide={handleClose}>
@@ -54,12 +58,12 @@ export default function JoinGroupButton({ group }) {
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Aneluteksti:</Form.Label>
+                            <Form.Label>Reason for leaving:</Form.Label>
                             <Form.Control 
                                 as="textarea" 
                                 rows={3} 
-                                placeholder="Miksi haluat liittyä ryhmään?"
-                                value={inviteText} onChange={(e) => setInviteText(e.target.value)}
+                                placeholder="We will miss you"
+                                value={leaveText} onChange={(e) => setLeaveText(e.target.value)}
                                 autoFocus
                             />
                         </Form.Group>
@@ -69,8 +73,8 @@ export default function JoinGroupButton({ group }) {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleJoinGroup}>
-                        Send Invite Request
+                    <Button variant="primary" onClick={handleLeaveGroup}>
+                        Leave Group
                     </Button>
                 </Modal.Footer>
             </Modal>

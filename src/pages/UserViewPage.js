@@ -6,7 +6,6 @@ import FetchReviews from '../components/FetchReviewsByUser'
 import FetchGroupsByUser from '../components/FetchGroupsByUser'
 import FetchUserInformation from '../components/FetchUserInformation'
 import FetchInvites from '../components/FetchInvites'
-import JoinGroupButton from '../components/JoinGroupButton'
 
 
 export default function UserViewPage() {
@@ -17,7 +16,6 @@ export default function UserViewPage() {
     return (
         <div>
             <div>Tervetuloa, {user.username}</div>
-            <JoinGroupButton group={93} />
             <UserView />
             <FetchUserInformation />
             <FetchGroupsByUser />

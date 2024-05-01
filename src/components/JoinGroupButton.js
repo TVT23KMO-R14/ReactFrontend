@@ -10,6 +10,8 @@ export default function JoinGroupButton({ group }) {
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
+    const [inviteText, setInviteText] = useState('default text')
+    if (!user) return null
     const userId = user.id
     const groupId = group
 
@@ -26,10 +28,11 @@ export default function JoinGroupButton({ group }) {
         try {
             const response = await axios.post(process.env.REACT_APP_SERVER_URL + 'invite/add', {
                 userId: userId,
-                groupId: groupId
+                groupId: groupId,
+                inviteText: inviteText
             })
-            console.log(response)
-            alert('Invite request sent')
+            console.log("inviteText: ", inviteText)
+            alert('Invite request sent' + inviteText)
             handleClose()
         } catch (error) {
             console.error(error)
@@ -56,6 +59,7 @@ export default function JoinGroupButton({ group }) {
                                 as="textarea" 
                                 rows={3} 
                                 placeholder="Miksi haluat liittyä ryhmään?"
+                                value={inviteText} onChange={(e) => setInviteText(e.target.value)}
                                 autoFocus
                             />
                         </Form.Group>

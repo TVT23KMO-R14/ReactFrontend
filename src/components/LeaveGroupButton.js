@@ -10,7 +10,6 @@ export default function LeaveGroupButton({ group }) {
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
-    const [userInGroup, setUserInGroup] = useState(null)
     const [leaveText, setLeaveText] = useState('')
     var userId = null
     var groupId = null

@@ -7,6 +7,7 @@ import FetchGroupsByUser from '../components/FetchGroupsByUser'
 import FetchUserInformation from '../components/FetchUserInformation'
 import FetchInvites from '../components/FetchInvites'
 import JoinGroupButton from '../components/JoinGroupButton'
+import './UserViewPage.css'
 
 
 export default function UserViewPage() {

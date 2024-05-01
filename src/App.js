@@ -23,6 +23,7 @@ import UserViewPage from './pages/UserViewPage';
 import Logout from './components/Logout';
 import AdvancedSearchbar from './components/AdvancedSearchbar';
 import GroupListPage from './components/GroupListPage';
+import AllGroupsPage from './components/ListAllGroups';
 
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
                 <Route path="/top100" element={<Top100 />} />
                 <Route path='/creategroup' element={<CreateGroup />} />
                 <Route path='/grouppage' element={<GroupPage />} />
+                <Route path="/allgroupspage" element={<AllGroupsPage />} />
                 <Route path="/movie/:id" element={<>
                   <MovieCard movie={selectedMovie} />
                   <ReviewMovie />

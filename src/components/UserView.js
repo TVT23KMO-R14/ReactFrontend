@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useUser } from '../context/useUser'
 import { Button, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
@@ -57,6 +57,7 @@ export default function UserView() {
   return (
     <div>
       <JoinGroupButton />
+      <Link to='/allgroupspage'><Button>All Groups</Button></Link>
       <div>UserView - Tämä on UserView.js komponentista</div>
       <Button variant="danger" onClick={handleOpen}>
         Delete user

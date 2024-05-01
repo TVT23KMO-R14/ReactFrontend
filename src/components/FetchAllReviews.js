@@ -40,6 +40,7 @@ export default function FetchAllReviews() {
                     <ListGroup.Item key={review.idReview}>
                         <Card.Text>Review: {review.review}</Card.Text>
                         <Card.Text>by user: {review.userName}</Card.Text>
+                        <Card.Text>Rating: {review.rating}</Card.Text>
                         {review.idMovie && (
                             <Link to={`/moviepage/${review.idMovie}`}>
                                 Go to Movie

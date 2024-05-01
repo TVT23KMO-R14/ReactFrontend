@@ -61,7 +61,6 @@ export default function MainSidebar() {
         <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/upcoming' } }); }}>
           Upcoming
         </a>
-        <Link to='/creategroup'><button>Create Group</button></Link>
       </div>
       <div className='sidebarcontent tvseriesfiltered'>
         <h2>TV Series</h2>

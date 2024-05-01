@@ -3,3 +3,7 @@
   border-bottom: 1px solid #16191c;
   font-size: 1.5rem;
 }
+
+.btn {
+  min-width: 120px;
+}

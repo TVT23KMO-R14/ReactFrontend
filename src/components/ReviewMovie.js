@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -16,13 +16,6 @@ export default function ReviewMovie({ movie }) {
     const [reviewInput, setReviewInput] = useState('')
     const [rating, setRating] = React.useState(10)
     const userId = user.id
-    const [lastUpdated, setLastUpdated] = useState(Date.now())
-
-    useEffect(() => {
-        // This effect runs every time `lastUpdated` changes
-        console.log('Component updated!');
-        // You can also place any additional logic here that should run on update.
-    }, [lastUpdated]); // Dependency array includes `lastUpdated`
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -36,8 +29,8 @@ export default function ReviewMovie({ movie }) {
             console.log(movie.id)
             setReviewInput('')
             setRating('')
-            setLastUpdated(Date.now())
-            //navigate('/userview')
+            window.location.reload();
+           
 
         } catch (error) {
             console.error('Error adding review', error);

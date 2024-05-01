@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useUser } from '../context/useUser'
 import { useState, useEffect } from 'react'
 import ListInvites from './ListInvites'
+import { Card, ListGroup } from 'react-bootstrap'
 
 
 export default function FetchInvites() {
@@ -42,6 +43,19 @@ export default function FetchInvites() {
 
     if (error) {
         return <p>{error}</p>
+    }
+
+    if (!showinvites) {
+        return (
+        <Card>
+        <Card.Header>Invite Requests</Card.Header>
+        <ListGroup variant="flush">
+            <ListGroup.Item>
+                <Card.Text>No invite requests found</Card.Text>
+            </ListGroup.Item>
+        </ListGroup>
+        </Card>
+        )
     }
 
     return (

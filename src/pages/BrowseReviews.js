@@ -1,7 +1,11 @@
-import React from 'react'
+
+import React from 'react';
+import FetchAllReviews from '../components/FetchAllReviews';
 
 export default function BrowseReviews() {
   return (
-    <div>BrowseReviews</div>
-  )
+    <div>
+      <FetchAllReviews />
+    </div>
+  );
 }

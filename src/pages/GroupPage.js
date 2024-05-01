@@ -2,13 +2,16 @@ import React, {useState, useEffect} from 'react'
 import './GroupPage.css'
 import GroupMemberList from '../components/GroupMemberList'
 import { useLocation } from 'react-router-dom'
+import { useUser } from '../context/useUser'
 import axios from 'axios'
+import JoinGroupButton from '../components/JoinGroupButton'
 
 export default function GroupPage() {
     const location = useLocation();
     const groupid = location.state.idGroup;
     console.log(groupid);
     const [group, setGroup] = useState(null)
+    const { user } = useUser()
 
     useEffect(() => {
         const fetchGroup = async () => {
@@ -28,7 +31,7 @@ export default function GroupPage() {
     return (
         <div className="group-page-container">
             <div className='group-page-header'>
-
+                <JoinGroupButton group={groupid} />
                 <div className='members-slider'>
                     <span className="material-symbols-outlined" id='member-button' type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Group</span>
                 </div>

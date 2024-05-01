@@ -3,6 +3,7 @@ import { Card, ListGroup, Row, Col, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
+
 export default function AllGroupsPage() {
     const navigate = useNavigate();
     const [groups, setGroups] = useState([]);

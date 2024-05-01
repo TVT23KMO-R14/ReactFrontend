@@ -11,10 +11,10 @@ export default function AllGroupsPage() {
         const fetchGroups = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/group/all');
-                for (let group of groups) {
+                /*for (let group of groups) {
                     const membersResponse = await axios.get(`http://localhost:3000/groupMember/all?groupId=${group.idGroup}`);
                     group.members = membersResponse.data;
-                }
+                }*/
                 setGroups(response.data);
                 
             } catch (error) {

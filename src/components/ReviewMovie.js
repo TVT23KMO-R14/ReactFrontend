@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -6,30 +6,38 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import RangeSlider from 'react-bootstrap-range-slider'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
-
+import { useUser } from '../context/useUser'
 
 
 export default function ReviewMovie({ movie }) {
 
+    const { user } = useUser()
     const navigate = useNavigate()
-    const [userId, setUserId] = useState('')
     const [reviewInput, setReviewInput] = useState('')
     const [rating, setRating] = React.useState(10)
+    const userId = user.id
+    const [lastUpdated, setLastUpdated] = useState(Date.now())
+
+    useEffect(() => {
+        // This effect runs every time `lastUpdated` changes
+        console.log('Component updated!');
+        // You can also place any additional logic here that should run on update.
+    }, [lastUpdated]); // Dependency array includes `lastUpdated`
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const parameters = { userId: userId, movieId: movie.id, review: reviewInput, rating: rating }
+            const parameters = { idUser: userId, idMovie: movie.id, review: reviewInput, rating: rating }
             const response = await axios.post(process.env.REACT_APP_SERVER_URL + 'review/add', parameters)
             console.log(process.env.REACT_APP_SERVER_URL + 'review/add')
             console.log(parameters)
             console.log(response.data)
             console.log(movie.id)
-            setUserId('')
             setReviewInput('')
             setRating('')
-            navigate('/userview')
+            setLastUpdated(Date.now())
+            //navigate('/userview')
 
         } catch (error) {
             console.error('Error adding review', error);
@@ -43,10 +51,6 @@ export default function ReviewMovie({ movie }) {
     return (
         <div className='card' style={{ width: '25rem', display: 'flex', padding: '20px'}}>
             <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formUserId">
-                    <Form.Label>userId</Form.Label>
-                    <Form.Control type="text" placeholder="Enter userId" onChange={(e) => setUserId(e.target.value)} required />
-                </Form.Group>
                 <Form.Group className="mb-3" controlId="formRating">
                     <Form.Label>Rating</Form.Label>
                         <RangeSlider

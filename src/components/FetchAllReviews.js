@@ -51,4 +51,4 @@ export default function FetchAllReviews() {
         </Card>
     );
 }
-// <Card.Text>for movie/show: {review.idMovie}</Card.Text>
+

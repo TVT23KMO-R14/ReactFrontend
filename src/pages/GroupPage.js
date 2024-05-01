@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { useUser } from '../context/useUser'
 import axios from 'axios'
 import JoinGroupButton from '../components/JoinGroupButton'
+import LeaveGroupButton from '../components/LeaveGroupButton'
 
 export default function GroupPage() {
     const location = useLocation();
@@ -32,6 +33,7 @@ export default function GroupPage() {
         <div className="group-page-container">
             <div className='group-page-header'>
                 <JoinGroupButton group={groupid} />
+                <LeaveGroupButton group={groupid} />
                 <div className='members-slider'>
                     <span className="material-symbols-outlined" id='member-button' type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Group</span>
                 </div>

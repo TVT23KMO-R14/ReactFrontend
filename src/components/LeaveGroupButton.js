@@ -30,10 +30,7 @@ export default function LeaveGroupButton({ group }) {
 
     const sendLeaveRequest = async () => {
         try {
-            const response = await axios.post(process.env.REACT_APP_SERVER_URL + 'group/leave', {
-                userId: userId,
-                groupId: groupId
-            })
+            const response = await axios.delete(process.env.REACT_APP_SERVER_URL + 'groupMember/remove?userId=' + userId + '&groupId=' + groupId)
             console.log(response)
             alert('Leave request sent')
             handleClose()

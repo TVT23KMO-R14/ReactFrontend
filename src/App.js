@@ -38,7 +38,7 @@ function App() {
 
   const handleMovieSelect = (movie) => {
     setSelectedMovie(movie);
-    navigate(`/movie/${movie.id}`);
+    navigate(`/moviepage/${movie.id}`);
   };
 
   const showSidebar = location.pathname !== '/login';

@@ -25,6 +25,7 @@ import AdvancedSearchbar from './components/AdvancedSearchbar';
 import GroupListPage from './components/GroupListPage';
 import BrowseGroups from './pages/BrowseGroups';
 import BrowseReviews from './pages/BrowseReviews';
+import FetchAllReviews from './components/FetchAllReviews';
 
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
 
   const handleMovieSelect = (movie) => {
     setSelectedMovie(movie);
-    navigate(`/movie/${movie.id}`);
+    navigate(`/moviepage/${movie.id}`);
   };
 
   const showSidebar = location.pathname !== '/login';
@@ -100,6 +101,7 @@ function App() {
                 <Route path='/groupList' element={<GroupListPage />} />
                 <Route path='/browsegroups' element={<BrowseGroups />} />
                 <Route path='/browsereviews' element={<BrowseReviews />} />
+                <Route path='/allreviews' element={<FetchAllReviews />} />
               </Routes>
             </div>
           </div>

@@ -14,7 +14,6 @@ import NewsDetails from './components/NewsFinnkino';
 import Login from './components/Login';
 import CreateGroup from './components/CreateGroup'
 import GroupPage from './pages/GroupPage';
-
 import UserProvider from './context/UserProvider';
 import ReviewMovie from './components/ReviewMovie';
 import MoviePage from './pages/MoviePage'
@@ -24,6 +23,7 @@ import UserViewPage from './pages/UserViewPage';
 import Logout from './components/Logout';
 import AdvancedSearchbar from './components/AdvancedSearchbar';
 import GroupListPage from './components/GroupListPage';
+
 
 function App() {
 

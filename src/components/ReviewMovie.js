@@ -6,30 +6,31 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import RangeSlider from 'react-bootstrap-range-slider'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
-
+import { useUser } from '../context/useUser'
 
 
 export default function ReviewMovie({ movie }) {
 
+    const { user } = useUser()
     const navigate = useNavigate()
-    const [userId, setUserId] = useState('')
     const [reviewInput, setReviewInput] = useState('')
     const [rating, setRating] = React.useState(10)
+    const userId = user.id
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const parameters = { userId: userId, movieId: movie.id, review: reviewInput, rating: rating }
+            const parameters = { idUser: userId, idMovie: movie.id, review: reviewInput, rating: rating }
             const response = await axios.post(process.env.REACT_APP_SERVER_URL + 'review/add', parameters)
             console.log(process.env.REACT_APP_SERVER_URL + 'review/add')
             console.log(parameters)
             console.log(response.data)
             console.log(movie.id)
-            setUserId('')
             setReviewInput('')
             setRating('')
-            navigate('/userview')
+            window.location.reload();
+           
 
         } catch (error) {
             console.error('Error adding review', error);
@@ -43,10 +44,6 @@ export default function ReviewMovie({ movie }) {
     return (
         <div className='card' style={{ width: '25rem', display: 'flex', padding: '20px'}}>
             <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formUserId">
-                    <Form.Label>userId</Form.Label>
-                    <Form.Control type="text" placeholder="Enter userId" onChange={(e) => setUserId(e.target.value)} required />
-                </Form.Group>
                 <Form.Group className="mb-3" controlId="formRating">
                     <Form.Label>Rating</Form.Label>
                         <RangeSlider

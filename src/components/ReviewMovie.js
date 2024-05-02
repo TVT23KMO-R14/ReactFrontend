@@ -30,8 +30,6 @@ export default function ReviewMovie({ movie }) {
             setReviewInput('')
             setRating('')
             window.location.reload();
-           
-
         } catch (error) {
             console.error('Error adding review', error);
             console.log(userId)

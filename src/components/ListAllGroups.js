@@ -11,11 +11,8 @@ export default function AllGroupsPage() {
     useEffect(() => {
         const fetchGroups = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/group/all');
-                /*for (let group of groups) {
-                    const membersResponse = await axios.get(`http://localhost:3000/groupMember/all?groupId=${group.idGroup}`);
-                    group.members = membersResponse.data;
-                }*/
+                const response = await axios.get(process.env.REACT_APP_SERVER_URL + 'group/all');
+            
                 setGroups(response.data);
                 
             } catch (error) {

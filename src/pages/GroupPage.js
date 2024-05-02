@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import './GroupPage.css'
 import GroupMemberList from '../components/GroupMemberList'
 import { useLocation } from 'react-router-dom'
@@ -6,6 +6,7 @@ import { useUser } from '../context/useUser'
 import axios from 'axios'
 import JoinGroupButton from '../components/JoinGroupButton'
 import LeaveGroupButton from '../components/LeaveGroupButton'
+import DeleteGroupButton from '../components/DeleteGroupButton'
 
 export default function GroupPage() {
     const location = useLocation();
@@ -14,6 +15,26 @@ export default function GroupPage() {
     const [group, setGroup] = useState(null)
     const { user } = useUser()
     const [isMember, setIsMember] = useState(false);
+    const [userRole, setUserRole] = useState('');
+
+    useEffect(() => {
+        const fetchMembers = async () => {
+            try {
+                const membersResponse = await axios.get('http://localhost:3000/groupMember/membersbygroup', { params: { groupId: groupid } });
+
+                if (membersResponse.data.some(member => member.user_idUser === user.id)) {
+                    setIsMember(true);
+                    const currentUser = membersResponse.data.find(member => member.user_idUser === user.id);
+                    setUserRole(currentUser.role);
+                }
+                console.log(userRole)
+            } catch (error) {
+                console.error('Error fetching members:', error);
+            }
+        };
+
+        fetchMembers();
+    }, [groupid]);
 
 
     useEffect(() => {
@@ -22,27 +43,26 @@ export default function GroupPage() {
                 const response = await axios.get(process.env.REACT_APP_SERVER_URL + 'group/one/', { params: { groupId: groupid } });
                 setGroup(response.data);
                 console.log(response.data);
-                const membersResponse = await axios.get('http://localhost:3000/groupMember/membersbygroup', {params: {groupId: groupid}});
+                const membersResponse = await axios.get('http://localhost:3000/groupMember/membersbygroup', { params: { groupId: groupid } });
+
                 console.log(membersResponse.data);
-                
                 if (membersResponse.data.some(member => member.user_idUser === user.id)) {
                     setIsMember(true);
                 }
-
-            } catch(error) {
+            } catch (error) {
                 console.error('Error fetching group:', error);
             }
         };
-    
+
         fetchGroup();
     }, [groupid])
-
 
     return (
         <div className="group-page-container">
             <div className='group-page-header'>
-            {!isMember && <JoinGroupButton group={groupid} />}
-            {isMember &&  <LeaveGroupButton group={groupid} />}
+                {isMember && userRole === 'admin' && <DeleteGroupButton group={groupid} />}
+                {!isMember && <JoinGroupButton group={groupid} />}
+                {isMember && <LeaveGroupButton group={groupid} />}
                 <div className='members-slider'>
                     <span className="material-symbols-outlined" id='member-button' type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Group</span>
                 </div>

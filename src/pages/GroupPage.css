@@ -14,10 +14,15 @@
     justify-content: end;
     width: 100%;
     align-items: center;
+    gap: 10px;
 }
 
 .group-page-header {
     border-bottom: 5px solid black;
+}
+
+.header-buttons {
+    justify-content: start;
 }
 
 .group-content {

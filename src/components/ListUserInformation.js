@@ -11,13 +11,13 @@ export default function ListUserInformation({ userInformation }) {
             <Card.Header>User Information</Card.Header>
             <ListGroup variant="flush">
                 <ListGroup.Item>
-                    <Card.Text>{userInformation.firstName}</Card.Text>
+                    <Card.Text>First Name: {userInformation.firstName}</Card.Text>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                    <Card.Text>{userInformation.lastName}</Card.Text>
+                    <Card.Text>Last Name: {userInformation.lastName}</Card.Text>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                    <Card.Text>{userInformation.userName}</Card.Text>
+                    <Card.Text>Username: {userInformation.userName}</Card.Text>
                 </ListGroup.Item>
                 <ListGroup.Item>
                     <Card.Text>{userInformation.email}</Card.Text>

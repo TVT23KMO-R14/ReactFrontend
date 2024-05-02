@@ -1,9 +1,9 @@
 .list-group-item:nth-child(even) {
-    background-color: #f5f5f5; /* Light gray color for even items */
+    background-color: #f5f5f5;
   }
 
 .listgroups:hover {
-    background-color: #81bae6;
+    background-color: #6589d765;
     cursor: pointer;
 }
 

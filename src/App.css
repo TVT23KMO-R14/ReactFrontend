@@ -57,6 +57,7 @@
   justify-content: start;
   flex-direction: column;
   background: rgba(12, 42, 211, 0.1);
+  gap: 0.5rem;
   flex: 1;
 }
 

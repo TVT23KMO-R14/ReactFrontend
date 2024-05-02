@@ -13,7 +13,7 @@ export default function MovieView() {
     const { id } = useParams();
     const { user } = useUser();
     const location = useLocation();
-    const objectType = location.state?.objectType || 'movies';
+    const objectType = location.state?.objectType || 'movie';
     
 
     useEffect(() => {
@@ -28,6 +28,7 @@ export default function MovieView() {
                     console.log('No movie found:', movieResponse);
                     return;
                 }
+                movieResponse.data.objectType = objectType;
                 setMovie(movieResponse.data);
                 console.log(movieResponse.data);
 
@@ -62,8 +63,9 @@ export default function MovieView() {
                 <ListGroup variant="flush">
                     {reviews.map((review) => (
                         <ListGroup.Item key={review.idReview}>
+                            <Card.Title>{review.reviewObjectName}</Card.Title>
                             <Card.Text>Review: {review.review}</Card.Text>
-                            <Card.Text>by user: {review.userName}</Card.Text>
+                            <Card.Text>By user: {review.userName}</Card.Text>
                             <Card.Text>Rating: {review.rating}</Card.Text>
                         </ListGroup.Item>
                     ))}

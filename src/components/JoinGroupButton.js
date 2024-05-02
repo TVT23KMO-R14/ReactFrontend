@@ -54,11 +54,11 @@ export default function JoinGroupButton({ group }) {
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Aneluteksti:</Form.Label>
+                            <Form.Label>Join Request:</Form.Label>
                             <Form.Control 
                                 as="textarea" 
                                 rows={3} 
-                                placeholder="Miksi haluat liittyä ryhmään?"
+                                placeholder="Write a message to the group admin..."
                                 value={inviteText} onChange={(e) => setInviteText(e.target.value)}
                                 autoFocus
                             />

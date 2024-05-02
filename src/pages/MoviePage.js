@@ -14,6 +14,7 @@ export default function MovieView() {
     const { user } = useUser();
     const location = useLocation();
     const objectType = location.state?.objectType || 'movie';
+    const [userHasReviewed, setUserHasReviewed] = useState(false);
     
 
     useEffect(() => {
@@ -33,10 +34,20 @@ export default function MovieView() {
                 console.log(movieResponse.data);
 
                 // Fetching reviews for the movie
-                const reviewResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}review/bymovie`, {
+                await axios.get(`${process.env.REACT_APP_SERVER_URL}review/bymovie`, {
                     params: { idMovie: id }
-                });
-                setReviews(reviewResponse.data);
+                })
+                .then((response) => {
+                    if (response.data.message === 'No reviews found') {
+                        return [];
+                    } else {
+                        setReviews(response.data);
+                        if(user){
+                            setUserHasReviewed(response.data.some(review => review.user_idUser === user.id));
+                        }
+                    }
+                })
+
             } catch (error) {
                 console.error('Error fetching data', error);
                 setError(error.message || 'An error occurred while fetching data.');
@@ -51,13 +62,14 @@ export default function MovieView() {
     }
 
     if (error) {
-        //return <p>{error}</p>;
+        return <p>{error}</p>;
     }
 
     return (
         <div>
             <MovieCard movie={movie} />
-            {user && <ReviewMovie movie={movie} />}
+            {user && !userHasReviewed && <ReviewMovie movie={movie} />}
+            {reviews.length > 0 &&
             <Card>
                 <Card.Header>Reviews</Card.Header>
                 <ListGroup variant="flush">
@@ -71,6 +83,9 @@ export default function MovieView() {
                     ))}
                 </ListGroup>
             </Card>
+            }   
         </div>
-    );
+    )
 }
+
+

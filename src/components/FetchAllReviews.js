@@ -4,11 +4,13 @@ import axios from 'axios';
 import { Card, ListGroup } from 'react-bootstrap'; 
 import { Link } from 'react-router-dom';
 import MovieCard from './MovieCard';
+import { useNavigate } from 'react-router-dom';
 
 export default function FetchAllReviews() {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -41,18 +43,17 @@ export default function FetchAllReviews() {
                     <ListGroup.Item key={review.idReview}>
                         <Card.Title>{review.reviewObjectName}</Card.Title>
                         <Card.Text>Review: {review.review}</Card.Text>
-                        <Card.Text>by user: {review.userName}</Card.Text>
+                        <Card.Text>By user: {review.userName}</Card.Text>
                         <Card.Text>Rating: {review.rating}</Card.Text>
                         <img
                             src={review.reviewImg}
                             style={{ width: '100px', height: '100px' }}
                         />
                         <Card.Text></Card.Text>
-                        {review.reviewType && (
-                            <Link to={`/moviepage/${review.idMovie}`}>
-                                Go to Movie
-                            </Link>
-                        )}
+                        <Card.Text><a href="#" onClick={(e) => {
+                            e.preventDefault();
+                            navigate(`/moviepage/${review.idMovie}`, { state: { objectType: review.reviewType } });
+                        }}>Go to {review.reviewType}</a></Card.Text>
                     </ListGroup.Item>
                 ))}
             </ListGroup>

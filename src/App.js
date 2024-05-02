@@ -61,6 +61,11 @@ function App() {
     }
   }, [location]);
 
+      // Scroll to the top whenever the location changes
+      useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location]);
+
   return (
     <UserProvider>
       <div className='viewport'>

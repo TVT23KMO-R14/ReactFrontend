@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Card, ListGroup } from 'react-bootstrap';
 import MovieCard from '../components/MovieCard';
@@ -12,12 +12,16 @@ export default function MovieView() {
     const [error, setError] = useState('');
     const { id } = useParams();
     const { user } = useUser();
+    const location = useLocation();
+    const objectType = location.state?.objectType || 'movies';
+    
 
     useEffect(() => {
         const fetchMovieAndReviews = async () => {
             try {
                 // Fetching movie details
-                const movieResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}search/onemovie`, {
+                
+                const movieResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}search/one${objectType}`, {
                     params: { id }
                 });
                 if (movieResponse.data.length === 0) {
@@ -25,6 +29,7 @@ export default function MovieView() {
                     return;
                 }
                 setMovie(movieResponse.data);
+                console.log(movieResponse.data);
 
                 // Fetching reviews for the movie
                 const reviewResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}review/bymovie`, {

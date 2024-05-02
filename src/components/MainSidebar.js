@@ -49,31 +49,31 @@ export default function MainSidebar() {
     <div className="sidebar">
       <div className='sidebarcontent moviefiltered'>
         <h2>Movies</h2>
-        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/top_rated' } }); }}>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/top_rated', objectType: 'movie' } }); }}>
           Top 100
         </a>
-        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/popular' } }); }}>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/popular', objectType: 'movie' } }); }}>
           Popular
         </a>
-        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/now_playing' } }); }}>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/now_playing', objectType: 'movie' } }); }}>
           Now Playing
         </a>
-        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/upcoming' } }); }}>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'movie/upcoming', objectType: 'movie' } }); }}>
           Upcoming
         </a>
       </div>
       <div className='sidebarcontent tvseriesfiltered'>
         <h2>TV Series</h2>
-        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/top_rated' } }); }}>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/top_rated', objectType: 'series' } }); }}>
           Top 100
         </a>
-        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/popular' } }); }}>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/popular', objectType: 'series' } }); }}>
           Popular
         </a>
-        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/on_the_air' } }); }}>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/on_the_air', objectType: 'series' } }); }}>
           On The Air
         </a>
-        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/airing_today' } }); }}>
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('/top100', { state: { filter: 'tv/airing_today', objectType: 'series' } }); }}>
           Airing Today
         </a>
       </div>

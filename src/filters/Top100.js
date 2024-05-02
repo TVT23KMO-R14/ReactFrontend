@@ -9,9 +9,10 @@ export default function Movie() {
     const [lastFilter, setLastFilter] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
+    const objectType = location.state?.objectType || 'movies';
 
     useEffect(() => {
-        console.log(location.state);
+        console.log('location state: ', location.state);
         const filter = location.state?.filter || 'default_filter';
         handleSubmit(filter);
     }, [location]);
@@ -50,6 +51,7 @@ export default function Movie() {
         setLastFilter(filter);
         console.log(filter);
 
+
         try {
             const response = await axios.get(process.env.REACT_APP_SERVER_URL + 'search/quicksearch', { params: { filter, page } });
             console.log(response.data.results);
@@ -80,7 +82,7 @@ export default function Movie() {
             </div>
             <div className='movie-list-top100'>
                 {movies.map((movie) => (
-                    <div key={movie.id} onClick={() => navigate(`/moviepage/${movie.id}`)}>
+                    <div key={movie.id} onClick={() => navigate(`/moviepage/${movie.id}`, { state: { objectType: objectType } } )}>
                         <div className='movie-top100'>
                             <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}></img>
                             <div className='layer'>

@@ -15,6 +15,7 @@ export default function GroupPage() {
     const { user } = useUser()
     const [isMember, setIsMember] = useState(false);
 
+
     useEffect(() => {
         const fetchGroup = async () => {
             try {

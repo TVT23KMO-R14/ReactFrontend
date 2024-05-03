@@ -20,7 +20,7 @@ export default function GroupPage() {
     useEffect(() => {
         const fetchMembers = async () => {
             try {
-                const membersResponse = await axios.get('http://localhost:3000/groupMember/membersbygroup', { params: { groupId: groupid } });
+                const membersResponse = await axios.get(process.env.REACT_APP_SERVER_URL + 'groupMember/membersbygroup', { params: { groupId: groupid } });
 
                 if (membersResponse.data.some(member => member.user_idUser === user.id)) {
                     setIsMember(true);
@@ -43,7 +43,7 @@ export default function GroupPage() {
                 const response = await axios.get(process.env.REACT_APP_SERVER_URL + 'group/one/', { params: { groupId: groupid } });
                 setGroup(response.data);
                 console.log(response.data);
-                const membersResponse = await axios.get('http://localhost:3000/groupMember/membersbygroup', { params: { groupId: groupid } });
+                const membersResponse = await axios.get(process.env.REACT_APP_SERVER_URL + 'groupMember/membersbygroup', { params: { groupId: groupid } });
 
                 console.log(membersResponse.data);
                 if (membersResponse.data.some(member => member.user_idUser === user.id)) {

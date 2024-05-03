@@ -25,7 +25,7 @@ export default function GroupMemberList({ groupid }) {
     useEffect(() => {
         const fetchMembers = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/groupMember/membersbygroup', { params: { groupId: groupid } });
+                const response = await axios.get(process.env.REACT_APP_SERVER_URL + 'groupMember/membersbygroup', { params: { groupId: groupid } });
                 setMembers(response.data);
 
                 if (response.data.some(member => member.user_idUser === user.id)) {
